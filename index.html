@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Twin UK Group Travel</title>
+	<!-- Base Url -->
+	<script>
+		document.write('<base href="' + document.location + '" />');
+	</script>
+	<!-- Meta Data -->
+	<meta charset="utf-8">
+	<meta content="IE=edge" http-equiv="X-UA-Compatible">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no">
+	<meta content="Bootstrap, a sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development." name="description">
+	<meta content="Mark Otto, Jacob Thornton, and Bootstrap contributors" name="author">
+	<link data-require="bootstrap-css@*" data-semver="3.2.0" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+	<!-- jQuery and Libraries -->
+	<!-- <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"> </script> -->
+	<script
+	  src="https://code.jquery.com/jquery-1.12.4.min.js"
+	  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+	  crossorigin="anonymous"></script>
+		 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<!-- <script src="https://www.paypalobjects.com/api/checkout.js"></script> -->
+	<script type="text/javascript" src="node_modules/moment/moment.js"></script>
+	<!--  Angular and Libraries -->
+	<script src="https://code.angularjs.org/1.2.20/angular.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.js"></script>
+  <!-- <script type="text/javascript" src="https://code.angularjs.org/1.2.20/angular-cookies.min.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.5.9/angular-sanitize.min.js"></script>
+	<!-- <script type="text/javascript" src="node_modules/angular-sanitize/angular-sanitize.js"></script> -->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
+	<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
+  <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+
+
+
+
+	<!-- <script type="text/javascript" src="assets/lib/datetimepicker.js"></script>
+  <script type="text/javascript" src="assets/lib/datetimepicker.templates.js"></script>
+  <script type="text/javascript" src="assets/lib/dateTimeInput.js"></script> -->
+
+	<script src="//rawgit.com/mgcrea/angular-strap/v2.1.5/dist/angular-strap.min.js"></script>
+    <script src="//rawgit.com/mgcrea/angular-strap/v2.1.5/dist/angular-strap.tpl.min.js"></script>
+
+  <!-- Services -->
+	<script src="app/services/api.service.js"></script>
+	<script src="app/services/cart.service.js"></script>
+	<!-- Controllers -->
+	<script src="app/components/home/home.controller.js"></script>
+	<script src="app/components/attraction/attraction.controller.js"></script>
+	<script src="app/components/search/search.controller.js"></script>
+	<!-- Twin App -->
+	<script type="text/javascript" src="app/config.js"></script>
+	<script type="text/javascript" src="app/run.js"></script>
+	<script type="text/javascript" src="app/app.js"></script>
+
+
+
+</head>
+<body ng-app="twinApp" ng-init="vm.showmenu=false" ng-class="{'show-menu': vm.showmenu}" ng-cloak>
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<div id="page">
+			<div affixer class="affixed">
+			<!-- Header -->
+			<header id="header">
+				<div id="main-menu">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-12 text-center">
+								<div id="logo" class="pull-left">
+									<a ui-sref="home">
+										<img class="pull-left" src="assets/images/logo.jpg" height="60px">
+										<h1>Group Travel</h1>
+										<div class="clearfix"></div>
+									</a>
+								</div>
+								<ul id="menu" class="list-inline text-center">
+									<li>
+										<a>Your Trip</a>
+										<div>
+  										<div class="col-lg-3">
+    										<h3>Your Trip</h3>
+  										</div>
+  										<div class="col-lg-3">
+      									<h4><a>Locations</a></h4>
+    										<ul class="list-unstyled">
+													<li><a>Location 1</a></li>
+													<li><a>Location 2</a></li>
+													<li><a>Location 3</a></li>
+													<li><a class="purple">Explore All</a></li>
+												</ul>
+  										</div>
+										  <div class="col-lg-3">
+										    <h4><a>Attractions</a></h4>
+										    <ul class="list-unstyled">
+													<li><a>Attraction 1</a></li>
+													<li><a>Attraction 2</a></li>
+													<li><a>Attraction 3</a></li>
+													<li><a class="purple">Explore All</a></li>
+												</ul>
+										 	</div>
+  										<div class="col-lg-3">
+	    									<h4><a>Expericences</a></h4>
+    										<ul class="list-unstyled">
+													<li><a>Experience 1</a></li>
+													<li><a>Experience 2</a></li>
+													<li><a>Experience 3</a></li>
+													<li><a class="purple">Explore All</a></li>
+												</ul>
+  										</div>
+										</div>
+									</li>
+									<li>
+										<a>Our Products</a>
+										<div>
+  										<div class="col-lg-3">
+    										<h3>Our Products</h3>
+  										</div>
+  										<div class="col-lg-3">
+      									<h4><a>Our Products</a></h4>
+    										<ul class="list-unstyled">
+													<li><a>Our Packages</a></li>
+													<li><a>School Integration</a></li>
+													<li><a>Special Offers</a></li>
+													<li><a>Bespoke Tours</a></li>
+												</ul>
+  										</div>
+										</div>
+									</li>
+									<li>
+										<a>Our Quality</a>
+										<div>
+  										<div class="col-lg-3">
+    										<h3>Our Quality</h3>
+  										</div>
+  										<div class="col-lg-3">
+      									<h4><a>Our Quality</a></h4>
+    										<ul class="list-unstyled">
+													<li><a>Saftey</a></li>
+													<li><a>Accommodation</a></li>
+													<li><a>About Us</a></li>
+													<li><a>FAQs</a></li>
+												</ul>
+  										</div>
+										</div>
+									</li>
+									<li>
+										<a>Working with us</a>
+										<div>
+  										<div class="col-lg-3">
+    										<h3>Working with us</h3>
+  										</div>
+  										<div class="col-lg-3">
+      									<h4><a>Our Quality</a></h4>
+    										<ul class="list-unstyled">
+													<li><a>I am an agent</a></li>
+													<li><a>I am an LO</a></li>
+													<li><a>I am a homestay host</a></li>
+													<li><a>I am a school based in the UK</a></li>
+												</ul>
+  										</div>
+										</div>
+									</li>
+									<li>
+										<a>Contact Us</a>
+										<div>
+  										<div class="col-lg-3">
+    										<h3>Contact Us</h3>
+  										</div>
+  										<div class="col-lg-3">
+      									<h4><a>Contact Us</a></h4>
+    										<ul class="list-unstyled">
+													<li><a>I want to ask a question</a></li>
+													<li><a>I want to request an invoice</a></li>
+												</ul>
+  										</div>
+										</div>
+									</li>
+								</ul>
+								<button id="showMenu" ng-click="vm.showmenu = true" class="visible-xs">
+									<span></span>
+									<span></span>
+									<span></span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+			<section id="quote-management">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-lg-3">
+							<button class="selection-btn"><i class="glyphicon glyphicon-heart"></i> <span>My selection</span></button>
+						</div>
+						<div class="col-lg-9">
+							<ul class="list-inline quote-stats pull-right">
+								<li class="days-needed">Attractions selected</li>
+								<li><span>10</span></li>
+								<li class="days-needed">Days needed</li>
+								<li><span>3</span></li>
+								<li>
+									<div class="progress">
+									  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+									    <span class="sr-only">60% Complete</span>
+									  </div>
+									</div>
+								</li>
+								<li><button>Get Quote</button></li>
+							</ul>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+					<div id="selection" class="row" ng-if="selections" ng-init="selections = false">
+						<div class="col-lg-12 col-md-12">
+							<ul class="list-inline">
+								<li>
+									<a href="#"><i class="glyphicon glyphicon-remove"></i></a>
+									<img src="assets/images/big-ben.jpg" />
+									<h6>Attraction Name</h6>
+									<div class="clearfix"></div>
+								</li>
+								<li>
+									<a href="#"><i class="glyphicon glyphicon-remove"></i></a>
+									<img src="assets/images/big-ben.jpg" />
+									<h6>Attraction Name</h6>
+									<div class="clearfix"></div>
+								</li>
+							</ul>
+						</div>
+					</div>
+						<!-- this is a selection of attractions -->
+					</div>
+				<a ng-click="selections = !selections"><i class="glyphicon glyphicon-triangle-bottom"></i></a>
+			</section>
+		</div>
+			<div class="content">
+				<div ui-view></div>
+			</div>
+			<!-- Contact -->
+			<!-- Footer -->
+			<footer id="footer">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-2">
+							<h4>Useful Links</h4>
+							<ul class="list-unstyled pull-left">
+								<li><a ui-sref="terms">FAQs</a></li>
+								<li><a ui-sref="privacy">Our Prices</a></li>
+								<li><a ui-sref="cookies">Privacy Policy</a></li>
+								<li><a ui-sref="cookies">Contact Us</a></li>
+							</ul>
+						</div>
+						<div class="col-lg-2">
+							<h4>Twin Products</h4>
+							<ul class="list-unstyled pull-left">
+								<li><a ui-sref="terms">Employment &amp; Training</a></li>
+								<li><a ui-sref="privacy">Work &amp; Volunteer</a></li>
+								<li><a ui-sref="cookies">English Centres</a></li>
+								<li><a ui-sref="cookies">Group Travel</a></li>
+								<li><a ui-sref="cookies">Accommodation</a></li>
+							</ul>
+						</div>
+						<div class="col-offset-lg-5 col-lg-3 pull-right">
+							<div class="footer-logo">
+								<img class="pull-left" src="assets/images/logo.jpg" height="60px">
+								<h6>Group Travel</h6>
+							</div>
+							<address>
+								<b>Twin Group</b><br>
+								The Greenwich Centre<br>
+								12 Lambarde Square<br>
+								Greenwich, London<br>
+								SE10 9GB<br>
+								Tel: <a href="tel:+442082692910">+44 (0) 20 8269 2910</a><br>
+								Fax: <a href="tel:+442082695660">+44 (0) 20 8269 5660</a>
+							</address>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+	<!-- <script>
+
+      function initMap() {
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 3,
+          center: {lat: -28.024, lng: 140.887}
+        });
+
+        // Create an array of alphabetical characters used to label the markers.
+        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        // Add some markers to the map.
+        // Note: The code uses the JavaScript Array.prototype.map() method to
+        // create an array of markers based on a given "locations" array.
+        // The map() method here has nothing to do with the Google Maps API.
+        var markers = locations.map(function(location, i) {
+          return new google.maps.Marker({
+            position: location,
+            label: labels[i % labels.length]
+          });
+        });
+
+        // Add a marker clusterer to manage the markers.
+        var markerCluster = new MarkerClusterer(map, markers,
+            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+      }
+      var locations = [
+        {lat: -31.563910, lng: 147.154312},
+        {lat: -33.718234, lng: 150.363181},
+        {lat: -33.727111, lng: 150.371124},
+        {lat: -33.848588, lng: 151.209834},
+        {lat: -33.851702, lng: 151.216968},
+        {lat: -34.671264, lng: 150.863657},
+        {lat: -35.304724, lng: 148.662905},
+        {lat: -36.817685, lng: 175.699196},
+        {lat: -36.828611, lng: 175.790222},
+        {lat: -37.750000, lng: 145.116667},
+        {lat: -37.759859, lng: 145.128708},
+        {lat: -37.765015, lng: 145.133858},
+        {lat: -37.770104, lng: 145.143299},
+        {lat: -37.773700, lng: 145.145187},
+        {lat: -37.774785, lng: 145.137978},
+        {lat: -37.819616, lng: 144.968119},
+        {lat: -38.330766, lng: 144.695692},
+        {lat: -39.927193, lng: 175.053218},
+        {lat: -41.330162, lng: 174.865694},
+        {lat: -42.734358, lng: 147.439506},
+        {lat: -42.734358, lng: 147.501315},
+        {lat: -42.735258, lng: 147.438000},
+        {lat: -43.999792, lng: 170.463352}
+      ]
+    </script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJn7swPa0tPFTHtY6DrSY2Qm-dhjg6l3w&callback=initMap">
+    </script> -->
+</body>
+</html>

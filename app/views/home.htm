@@ -1,0 +1,234 @@
+<!-- ng-controller="HomeController" -->
+<div >
+	<!-- Hero -->
+	<section id="hero">
+		<div class="hero">
+			<img src="assets/images/hero.jpg" class="back" width="100%" />
+			<div class="front text-center">
+				<h1>Urban, Street Dance &amp; Hip Hop Company</h1>
+				<p>Movement - Music - Entertainment</p>
+			</div>
+		</div>
+	</section>
+	<!--  About -->
+	<section id="about-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+		<p>Nulla eros metus, sagittis quis dui eu, porta iaculis ligula. Praesent non tempus mi, ac lacinia mauris. Phasellus quis fermentum augue, eu accumsan mauris. Morbi venenatis rutrum pharetra. Maecenas condimentum erat vel elit condimentum, et viverra massa tristique. Integer rhoncus mattis est, in porttitor massa ullamcorper id. Curabitur mattis, nisi id viverra congue, lacus nulla placerat urna, quis consectetur purus tellus sit amet dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam in sapien quis mauris tempor ultricies eu tempus velit. Phasellus et bibendum ante. Quisque rhoncus mauris et velit interdum tempor. Nullam ex lorem, sodales vitae eleifend id, suscipit ac velit.</p>
+		<a href="http://localhost/xpozure/#!/about">Read More</a><a></a>
+       </div>
+    </div>
+  </div>
+</section>
+	<!-- Latest Acitities -->
+	<section id="acitivies">
+		<div class="col-lg-4 col-md-4">
+			<a href="http://localhost/xpozure/#!/classes" class="feature">
+				<img src="assets/images/dance-class.jpg" width="100%"/>
+				<h3>Classes</h3>
+			</a>
+		</div>
+		<div class="col-lg-4 col-md-4">
+			<a href="http://localhost/xpozure/#!/auditions" class="feature">
+				<img src="assets/images/dance-audition.jpg" width="100%"/>
+				<h3>Auditions</h3>
+			</a>
+		</div>
+		<div class="col-lg-4 col-md-4">
+			<a href="http://localhost/xpozure/#!/events" class="feature">
+				<img src="assets/images/dance-event.jpg" width="100%"/>
+				<h3>Events</h3>
+			</a>
+		</div>
+		<div class="clearfix"></div>
+	</section>
+	<!-- Latest Videos -->
+	<section id="videos">
+		<div class="col-lg-12">
+			<h2>Latest Videos</h2>
+		</div>
+		<div class="col-lg-4 col-md-4" ng-repeat="video in videos">
+			<div href="" class="card">
+				<div>
+					<a href="#/video/{{video.id}}">
+						<img src="{{video.img}}" width="100%" />
+						<div class="video-overlay"><i class="play"></i></div>
+					</a>
+				</div>
+				<div class="card-content">
+					<h5 class="pull-left">{{video.title}}</h5>
+					<ul class="list-inline pull-right">
+						<li><a href="#"><i class="like"></i></a></li>
+						<li><a href="#"><i class="share"></i></a></li>
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12 text-center">
+			<a href="#" class="btn btn-priamry">More Videos</a>
+		</div>
+		<div class="clearfix"></div>
+	</section>
+	<!-- Upcoming Event and Classes -->
+	<section id="upcoming">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 border-right">
+					<h3>Latest News</h3>
+					<div class="news-stores text-left">
+						<div class="media">
+							<h5><i class="source"></i> This is a news story tittle</h5>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sagittis sed sapien et pellentesque. Curabitur volutpat est non eros tempus pretium. Vivamus quam risus, ultricies fermentum vestibulum porttitor, mollis ut quam. Praesent finibus hendrerit tortor, sit amet cursus magna porttitor a...<a href="#">read more</a></p>
+						</div>
+						<div class="media">
+							<h5><i class="source"></i> This is a news story tittle</h5>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sagittis sed sapien et pellentesque. Curabitur volutpat est non eros tempus pretium. Vivamus quam risus, ultricies fermentum vestibulum porttitor, mollis ut quam. Praesent finibus hendrerit tortor, sit amet cursus magna porttitor a...<a href="#">read more</a></p>
+						</div>
+						<div class="media">
+							<h5><i class="source"></i> This is a news story tittle</h5>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sagittis sed sapien et pellentesque. Curabitur volutpat est non eros tempus pretium. Vivamus quam risus, ultricies fermentum vestibulum porttitor, mollis ut quam. Praesent finibus hendrerit tortor, sit amet cursus magna porttitor a...<a href="#">read more</a></p>
+						</div>
+						<div class="media">
+							<h5><i class="source"></i> This is a news story tittle</h5>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sagittis sed sapien et pellentesque. Curabitur volutpat est non eros tempus pretium. Vivamus quam risus, ultricies fermentum vestibulum porttitor, mollis ut quam. Praesent finibus hendrerit tortor, sit amet cursus magna porttitor a...<a href="#">read more</a></p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6"> 
+					<h3>Schedule</h3>
+					<ul id="events-filter" class="list-inline">
+						<li class="active">All</li>
+						<li><i class="red"></i> Events</li>
+						<li><i class="blue"></i> Classes</li>
+						<li><i class="greebn"></i> Auditions</li>
+					</ul>
+					<div class="events">
+						<div class="event-listing event-today">
+							<ul class="list-unstyled event-list">
+								<li class="media">
+									<div class="media-left">
+										<div href="#" class="date" >
+										  <span class="day">12</span>
+										  <span class="month">June</span> 
+										</div>
+									</div>
+									<div class="media-body">
+										<div class="col-lg-10 col-md-10">
+											<a href="#" class="event-title"><h6>This would be the title for any event</h6></a>
+											<ul class="event-details list-unstyled">
+												<li class="date-time"><i></i> Today, 5pm</li>
+												<li class="location"><i></i> <a href="#">Brixton Recreation Centre, SW9</a></li>
+											</ul>
+										</div>
+										<div class="col-lg-2 col-md-2">
+											<ul class="event-cta list-unstyled">
+												<li class="event-host"><i></i> <a href="#">Xpozure Dance</a></li>
+												<li class="rsvp"><a href="#" class="btn btn-primary btn-block">RSVP</a></li>
+											</ul>
+										</div>
+									</div>
+								</li>
+								<li class="media">
+									<div class="media-left">
+										<div href="#" class="date" >
+										  <span class="day">12</span>
+										  <span class="month">June</span> 
+										</div>
+									</div>
+									<div class="media-body">
+										<div class="col-lg-10 col-md-10">
+											<a href="#" class="event-title"><h6>This would be the title for any event</h6></a>
+											<ul class="event-details list-unstyled">
+												<li class="date-time"><i></i> Today, 5pm</li>
+												<li class="location"><i></i> <a href="#">Brixton Recreation Centre, SW9</a></li>
+											</ul>
+										</div>
+										<div class="col-lg-2 col-md-2">
+											<ul class="event-cta list-unstyled">
+												<li class="event-host"><i></i> <a href="#">Xpozure Dance</a></li>
+												<li class="rsvp"><a href="#" class="btn btn-primary btn-block">RSVP</a></li>
+											</ul>
+										</div>
+									</div>
+								</li>
+								<li class="media">
+									<div class="media-left">
+										<div href="#" class="date" >
+										  <span class="day">12</span>
+										  <span class="month">June</span> 
+										</div>
+									</div>
+									<div class="media-body">
+										<div class="col-lg-10 col-md-10">
+											<a href="#" class="event-title"><h6>This would be the title for any event</h6></a>
+											<ul class="event-details list-unstyled">
+												<li class="date-time"><i></i> Today, 5pm</li>
+												<li class="location"><i></i> <a href="#">Brixton Recreation Centre, SW9</a></li>
+											</ul>
+										</div>
+										<div class="col-lg-2 col-md-2">
+											<ul class="event-cta list-unstyled">
+												<li class="event-host"><i></i> <a href="#">Xpozure Dance</a></li>
+												<li class="rsvp"><a href="#" class="btn btn-primary btn-block">RSVP</a></li>
+											</ul>
+										</div>
+									</div>
+								</li>
+								<li class="media">
+									<div class="media-left">
+										<div href="#" class="date">
+										  <span class="day">12</span>
+										  <span class="month">June</span> 
+										</div>
+									</div>
+									<div class="media-body">
+										<div class="col-lg-10 col-md-10">
+											<a href="#" class="event-title"><h6>This would be the title for any event</h6></a>
+											<ul class="event-details list-unstyled">
+												<li class="date-time"><i></i> Today, 5pm</li>
+												<li class="location"><i></i> <a href="#">Brixton Recreation Centre, SW9</a></li>
+											</ul>
+										</div>
+										<div class="col-lg-2 col-md-2">
+											<ul class="event-cta list-unstyled">
+												<li class="event-host"><i></i> <a href="#">Xpozure Dance</a></li>
+												<li class="rsvp"><a href="#" class="btn btn-primary btn-block">RSVP</a></li>
+											</ul>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-12 text-center">
+						<a href="#" class="text-center">Vew All Events</a>
+					</div>
+				</div>
+			</div>	
+		</div>
+	</section>
+	<!-- Team -->
+	<section id="team">
+		<div class="hero">
+			<img src="assets/images/hero.jpg" class="back" width="100%" />
+			<div class="front text-center">
+				<h2>Our Team</h2>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4" ng-repeat="member in team">
+				<a href="{{member.url}}" class="team-member">
+					<img src="{{member.img}}" width="100%">
+					<div class="info">
+						<h5>{{member.name}}</h5>
+						<h6>{{member.title}}</h6>
+					</div>
+				</a>
+			</div>
+			</div>
+		</div>
+	</section>
+</div>
