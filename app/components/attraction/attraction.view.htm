@@ -1,57 +1,78 @@
-<div class="container">
-	<div class="row">
-		<div class="col-lg-12">
-			<h1>Attraction Name</h1>
-			<div class="experience-tags">
-				<ul class="list-inline">
-						<li><i class="tag1-icon"></i></li>
-						<li><i class="tag2-icon"></i></li>
-						<li><i class="tag3-icon"></i></li>
-				</ul>
+<div ng-controller="AttractionController as vm">
+	<!-- {{vm.attraction}} -->
+	<div class="container">
+		<div class="row">
+			<div class="loader" ng-if="vm.loading"  class="fade-content">
+				<div id="fountainG">
+					<div id="fountainG_1" class="fountainG"></div>
+					<div id="fountainG_2" class="fountainG"></div>
+					<div id="fountainG_3" class="fountainG"></div>
+					<div id="fountainG_4" class="fountainG"></div>
+					<div id="fountainG_5" class="fountainG"></div>
+					<div id="fountainG_6" class="fountainG"></div>
+					<div id="fountainG_7" class="fountainG"></div>
+					<div id="fountainG_8" class="fountainG"></div>
+				</div>
+			</div>
+			<div ng-if="!vm.loading" class="fade-content">
+			 	<div class="col-lg-12">
+				<h1>{{vm.attraction.attraction}}</h1>
+				<div class="experience-tags">
+					<ul class="list-inline">
+							<li><i class="tag1-icon"></i></li>
+							<li><i class="tag2-icon"></i></li>
+							<li><i class="tag3-icon"></i></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-7 attraction-image">
+				<div class="large-image">
+					<img ng-src="{{vm.attraction.images[0]}}" />
+					<a ng-click="vm.addAttraction(vm.attraction)"><i class="glyphicon glyphicon-heart"></i></a>
+				</div>
+				<div class="thumbnail-images">
+					<ul class="list-inline">
+						<li ng-repeat="image in vm.attraction.thumbnails" class="col-lg-4"><a href="#"><img ng-src="{{image}}" width="100%" /></a></li>
+					</ul>
+
+				</div>
+			</div>
+			<div class="col-lg-5 attraction-description">
+				<div ng-bind-html="vm.attraction.body | unsafe"></div>
+				<address>
+					{{vm.attraction.field_address_address_line1}}
+					{{vm.attraction.field_address_address_line2}}
+					{{vm.attraction.field_address_country_code}}
+					{{vm.attraction.field_address_postal_code}}
+				</address>
+				<button class="btn btn-primary">Add to selection</section>
+			</div>
+			<div class="col-lg-12 attraction-location">
+				<h3>Location</h3>
+				<div class="attraction-map">
+					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.5391499026014!2d-0.12173704886296358!3d51.50332397953459!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604b900d26973%3A0x4291f3172409ea92!2sCoca+Cola+London+Eye!5e0!3m2!1sen!2suk!4v1496947306981" width="1200" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+				</div>
+				<hr>
+			</div>
+			<div class="col-lg-12 related-attractions">
+				<h2>You might also like:</h2>
+			</div>
+			<div class="col-lg-4 related-attraction">
+				<img src="http://placehold.it/300x300" />
+				<h3>Heading</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque leo lorem, sagittis eget dictum vitae, ornare eu dui. Vestibulum nisl augue, aliquam ac aliquet ut, condimentum sit amet augue. Nullam vitae cursus arcu. Sed fringilla eget ligula id egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec sed cursus sapien. Duis dictum vestibulum convallis.</p>
+			</div>
+			<div class="col-lg-4 related-attraction">
+				<img src="http://placehold.it/300x300" />
+				<h3>Heading</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque leo lorem, sagittis eget dictum vitae, ornare eu dui. Vestibulum nisl augue, aliquam ac aliquet ut, condimentum sit amet augue. Nullam vitae cursus arcu. Sed fringilla eget ligula id egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec sed cursus sapien. Duis dictum vestibulum convallis.</p>
+			</div>
+			<div class="col-lg-4 related-attraction">
+				<img src="http://placehold.it/300x300" />
+				<h3>Heading</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque leo lorem, sagittis eget dictum vitae, ornare eu dui. Vestibulum nisl augue, aliquam ac aliquet ut, condimentum sit amet augue. Nullam vitae cursus arcu. Sed fringilla eget ligula id egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec sed cursus sapien. Duis dictum vestibulum convallis.</p>
 			</div>
 		</div>
-		<div class="col-lg-7 attraction-image">
-			<div class="large-image">
-				<img src="http://placehold.it/646x450" />
-				<a href="#"><i class="glyphicon glyphicon-heart"></i></a>
-			</div>
-			<div class="thumbnail-images">
-				<ul class="list-inline">
-					<li class="col-lg-4"><a href="#"><img src="http://placehold.it/300x300" width="100%" /></a></li>
-					<li class="col-lg-4"><a href="#"><img src="http://placehold.it/300x300" width="100%" /></a></li>
-					<li class="col-lg-4"><a href="#"><img src="http://placehold.it/300x300" width="100%" /></a></li>
-				</ul>
-			</div>
-		</div>
-		<div class="col-lg-5 attraction-description">
-			<p>In hendrerit nulla blandit, sollicitudin justo sit amet, mollis risus. Praesent lacinia lacus eu lectus commodo tristique sit amet sit amet eros. Pellentesque eu convallis sapien. Vestibulum vulputate pretium libero at pharetra. Donec ut elementum sapien. Suspendisse sit amet velit ac nibh aliquet tempus sit amet sed neque. Etiam orci lorem, bibendum id est ac, condimentum faucibus nulla. Suspendisse quis orci ac eros semper tincidunt a in erat. Morbi vel posuere dolor, at condimentum tellus.</p>
-			<p>Nulla mollis varius nisi nec rhoncus. Suspendisse vitae tempus dolor, at fringilla mauris. Nulla facilisi. Aenean in arcu urna. Vestibulum justo orci, pulvinar ac consequat vel, pellentesque sit amet orci. In ultricies nunc et sem commodo, quis laoreet tortor luctus. Sed hendrerit justo sit amet ex egestas blandit. Ut vitae hendrerit magna. Cras eget luctus leo. Donec ultrices, lacus et semper mattis, diam enim laoreet nulla, ac blandit sapien orci in odio. Vivamus tincidunt lectus molestie augue semper vestibulum et ut diam. Ut in augue laoreet, consectetur nisl ac, faucibus eros. Ut maximus non odio vitae condimentum. Maecenas mollis sem a leo lobortis dignissim.</p>
-			<button class="btn btn-primary">Add to selection</section>
-		</div>
-		<div class="col-lg-12 attraction-location">
-			<h3>Location</h3>
-			<div class="attraction-map">
-				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.5391499026014!2d-0.12173704886296358!3d51.50332397953459!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604b900d26973%3A0x4291f3172409ea92!2sCoca+Cola+London+Eye!5e0!3m2!1sen!2suk!4v1496947306981" width="1200" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
-			</div>
-			<hr>
-		</div>
-		<div class="col-lg-12 related-attractions">
-			<h2>You might also like:</h2>
-		</div>
-		<div class="col-lg-4 related-attraction">
-			<img src="http://placehold.it/300x300" />
-			<h3>Heading</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque leo lorem, sagittis eget dictum vitae, ornare eu dui. Vestibulum nisl augue, aliquam ac aliquet ut, condimentum sit amet augue. Nullam vitae cursus arcu. Sed fringilla eget ligula id egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec sed cursus sapien. Duis dictum vestibulum convallis.</p>
-		</div>
-		<div class="col-lg-4 related-attraction">
-			<img src="http://placehold.it/300x300" />
-			<h3>Heading</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque leo lorem, sagittis eget dictum vitae, ornare eu dui. Vestibulum nisl augue, aliquam ac aliquet ut, condimentum sit amet augue. Nullam vitae cursus arcu. Sed fringilla eget ligula id egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec sed cursus sapien. Duis dictum vestibulum convallis.</p>
-		</div>
-		<div class="col-lg-4 related-attraction">
-			<img src="http://placehold.it/300x300" />
-			<h3>Heading</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque leo lorem, sagittis eget dictum vitae, ornare eu dui. Vestibulum nisl augue, aliquam ac aliquet ut, condimentum sit amet augue. Nullam vitae cursus arcu. Sed fringilla eget ligula id egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec sed cursus sapien. Duis dictum vestibulum convallis.</p>
-		</div>
+	</div>
 	</div>
 </div>

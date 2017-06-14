@@ -1,0 +1,37 @@
+{
+  "name": "ng-affix",
+  "version": "0.1.1",
+  "authors": [
+    {
+      "name": "Gaetan SENN",
+      "email": "gaetan.senn@gmail.com"
+    }
+  ],
+  "main": [
+    "dist/ng-affix.js"
+  ],
+  "ignore": [
+    "src",
+    "test",
+    "gulpfile.js",
+    "karma-*.conf.js",
+    "**/.*"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "angular-mocks": ">=1.2.0",
+    "angular-scenario": ">=1.2.0",
+    "angular": ">=1.2.0"
+  },
+  "homepage": "https://github.com/gaetansenn/ng-affix",
+  "_release": "0.1.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.1.1",
+    "commit": "a1b35b700031413e66dceff3625fd4da2d0627ee"
+  },
+  "_source": "https://github.com/gaetansenn/ng-affix.git",
+  "_target": "^0.1.1",
+  "_originalSource": "ng-affix",
+  "_direct": true
+}

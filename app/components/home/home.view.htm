@@ -76,35 +76,39 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
-				<h2>Top picks</h2>
-				<div class="col-lg-4 col-md-4">
-					<div class="image">
-						<a class="image-link"><img src="assets/images/the-london-eye.jpg" /></a>
-						<a class="selection-link"><i class="glyphicon glyphicon-heart"></i></a>
+				<div class="loader" ng-if="vm.loading"  class="fade-content">
+					<div id="fountainG">
+						<div id="fountainG_1" class="fountainG"></div>
+						<div id="fountainG_2" class="fountainG"></div>
+						<div id="fountainG_3" class="fountainG"></div>
+						<div id="fountainG_4" class="fountainG"></div>
+						<div id="fountainG_5" class="fountainG"></div>
+						<div id="fountainG_6" class="fountainG"></div>
+						<div id="fountainG_7" class="fountainG"></div>
+						<div id="fountainG_8" class="fountainG"></div>
 					</div>
-					<a><h3>The London Eye</h3></a>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque leo lorem, sagittis eget dictum vitae, ornare eu dui. Vestibulum nisl augue, aliquam ac aliquet ut, condimentum sit amet augue. Nullam vitae cursus arcu. Sed fringilla eget ligula id egestas. Vestibulum ante ipsum primis in faucibus orci luctus.</p>
-					<a href="#" class="read-more">Read more <i class="glyphicon glyphicon-triangle-right"></i></a>
 				</div>
-				<div class="col-lg-4 col-md-4">
+				<div ng-if="!vm.loading" class="fade-content">
+				<h2>Top picks</h2>
+				<div ng-repeat="attraction in [vm.homepage.attractions[0], vm.homepage.attractions[1]]" class="col-lg-4 col-md-4">
 					<div class="image">
-						<a class="image-link"><img src="assets/images/big-ben.jpg" /></a>
-						<a class="selection-link"><i class="glyphicon glyphicon-heart"></i></a>
+						<a ui-sref="attraction({id:attraction.nid})"  class="image-link"><img ng-src="{{attraction.thumbnails[0]}}" /></a>
+						<a ng-click="vm.addAttraction(attraction)" class="selection-link"><i class="glyphicon glyphicon-heart"></i></a>
 					</div>
-					<a><h3>Big Ben</h3></a>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque leo lorem, sagittis eget dictum vitae, ornare eu dui. Vestibulum nisl augue, aliquam ac aliquet ut, condimentum sit amet augue. Nullam vitae cursus arcu. Sed fringilla eget ligula id egestas. Vestibulum ante ipsum primis in faucibus orci luctus.</p>
-					<a href="#" class="read-more">Read more <i class="glyphicon glyphicon-triangle-right"></i></a>
+					<a><h3>{{attraction.Title}}</h3></a>
+					<div ng-bind-html="attraction.body | unsafe"></div>
+					<a ui-sref="attraction({id:attraction.nid})" class="read-more">Read more <i class="glyphicon glyphicon-triangle-right"></i></a>
 				</div>
 				<div class="col-lg-4 col-md-4">
 					<ul class="list-inline">
-						<li class="col-lg-6  attraction-thumb">
-							<a>
-								<img src="assets/images/buckingham-palace.jpg" />
-								<h3>Buckingham Palace</h3>
+						<li ng-repeat="attraction in [vm.homepage.attractions[2], vm.homepage.attractions[3], vm.homepage.attractions[4]]" class="col-lg-6  attraction-thumb">
+							<a ui-sref="attraction({id:attraction.nid})" >
+								<img ng-src="{{attraction.thumbnails[0]}}" />
+								<h3>{{attraction.Title}}</h3>
 							</a>
-							<a class="selection-link"><i class="glyphicon glyphicon-heart"></i></a>
+							<a ng-click="vm.addAttraction(attraction)" class="selection-link"><i class="glyphicon glyphicon-heart"></i></a>
 						</li>
-						<li class="col-lg-6 attraction-thumb">
+						<!-- <li class="col-lg-6 attraction-thumb">
 							<a>
 								<img src="assets/images/tower-of-london.jpg" />
 								<h3>Tower of London</h3>
@@ -117,9 +121,10 @@
 								<h3>St Paul's Cathedral</h3>
 							</a>
 							<a class="selection-link"><i class="glyphicon glyphicon-heart"></i></a>
-						</li>
+						</li> -->
 					</ul>
 				</div>
+			</div>
 			</div>
 		</div>
 	</div>

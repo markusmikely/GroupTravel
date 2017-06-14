@@ -1,11 +1,14 @@
-
-var app= angular.module("twinApp", ['ngSanitize',  'ui.router',  'ui.bootstrap'])
+// , 'ngAffix', 'ngSanitize',  ,  'ui.bootstrap'
+var app= angular.module("twinApp", ['ngCookies', 'ui.router'])
 	.provider('modalState', modalProvider)
   .run(run)
 	.config(config)
+	.factory('PagerService', PagerService)
+	.service("CartService", CartService)
 	.controller('HomeController', HomeController)
 	.controller('AttractionController', AttractionController)
 	.controller('SearchController', SearchController)
+	.controller('SelectionController', SelectionController)
 	.directive('affixer', function ($window) {
     return {
         restrict: 'A',
@@ -31,5 +34,10 @@ var app= angular.module("twinApp", ['ngSanitize',  'ui.router',  'ui.bootstrap']
             });
             win.bind('scroll', affixElement);
         }
+    };
+})
+.filter('unsafe', function($sce) {
+    return function(val) {
+        return $sce.trustAsHtml(val);
     };
 });

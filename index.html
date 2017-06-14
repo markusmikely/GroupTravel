@@ -27,10 +27,10 @@
 	<!-- <script src="https://www.paypalobjects.com/api/checkout.js"></script> -->
 	<script type="text/javascript" src="node_modules/moment/moment.js"></script>
 	<!--  Angular and Libraries -->
-	<script src="https://code.angularjs.org/1.2.20/angular.js"></script>
+	<script src="https://code.angularjs.org/1.5.9/angular.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.js"></script>
-  <!-- <script type="text/javascript" src="https://code.angularjs.org/1.2.20/angular-cookies.min.js"></script> -->
+	<script type="text/javascript" src="https://code.angularjs.org/1.5.9/angular-cookies.min.js"></script>
+    <!-- <script type="text/javascript" src="https://code.angularjs.org/1.2.20/angular-cookies.min.js"></script> -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.5.9/angular-sanitize.min.js"></script>
 	<!-- <script type="text/javascript" src="node_modules/angular-sanitize/angular-sanitize.js"></script> -->
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
@@ -45,21 +45,47 @@
   <script type="text/javascript" src="assets/lib/dateTimeInput.js"></script> -->
 
 	<script src="//rawgit.com/mgcrea/angular-strap/v2.1.5/dist/angular-strap.min.js"></script>
-    <script src="//rawgit.com/mgcrea/angular-strap/v2.1.5/dist/angular-strap.tpl.min.js"></script>
+  <script src="//rawgit.com/mgcrea/angular-strap/v2.1.5/dist/angular-strap.tpl.min.js"></script>
+	<!-- Directives -->
+	<!-- <script src="bower_components/angular-jquery/dist/angular-jquery.min.js"></script>
+	<script src="bower_components/angular-bootstrap-affix/dist/angular-bootstrap-affix.min.js"></script> -->
+	<script src="bower_components/ng-affix/dist/js/ng-affix.js"></script>
 
-  <!-- Services -->
+	<!-- Services -->
 	<script src="app/services/api.service.js"></script>
+	<script src="app/services/pager.service.js"></script>
 	<script src="app/services/cart.service.js"></script>
 	<!-- Controllers -->
 	<script src="app/components/home/home.controller.js"></script>
 	<script src="app/components/attraction/attraction.controller.js"></script>
 	<script src="app/components/search/search.controller.js"></script>
+	<script src="app/components/selection/selection.controller.js"></script>
 	<!-- Twin App -->
 	<script type="text/javascript" src="app/config.js"></script>
 	<script type="text/javascript" src="app/run.js"></script>
 	<script type="text/javascript" src="app/app.js"></script>
 
+	<!-- <script>
+	(function() {
 
+		var headerHeight = $('header').outerHeight(true); // true value, adds margins to the total height
+		var footerHeight = $('footer').innerHeight();
+		$('#map-view').affix({
+				offset: {
+						top: headerHeight,
+						bottom: footerHeight
+				}
+		}).on('affix.bs.affix', function () { // before affix
+				$(this).css({
+						/*'top': headerHeight,*/    // for fixed height
+								'width': $(this).outerWidth()  // variable widths
+				});
+		}).on('affix-bottom.bs.affix', function () { // before affix-bottom
+				$(this).css('bottom', 'auto'); // THIS is what makes the jumping
+		});
+	})();
+	})
+	</script> -->
 
 </head>
 <body ng-app="twinApp" ng-init="vm.showmenu=false" ng-class="{'show-menu': vm.showmenu}" ng-cloak>
@@ -194,7 +220,7 @@
 					</div>
 				</div>
 			</header>
-			<section id="quote-management">
+			<section id="quote-management" ng-controller="SelectionController as vm">
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-lg-3">
@@ -203,7 +229,7 @@
 						<div class="col-lg-9">
 							<ul class="list-inline quote-stats pull-right">
 								<li class="days-needed">Attractions selected</li>
-								<li><span>10</span></li>
+								<li><span>{{cart.length}}</span></li>
 								<li class="days-needed">Days needed</li>
 								<li><span>3</span></li>
 								<li>
@@ -221,18 +247,18 @@
 					<div id="selection" class="row" ng-if="selections" ng-init="selections = false">
 						<div class="col-lg-12 col-md-12">
 							<ul class="list-inline">
-								<li>
+								<li ng-repeat="attraction in cart">
+									<a ng-click="vm.removeAttraction($index)"><i class="glyphicon glyphicon-remove"></i></a>
+									<img ng-src="{{attraction.thumbnails[0]}}" />
+									<h6>{{attraction.Title}}</h6>
+									<div class="clearfix"></div>
+								</li>
+								<!-- <li>
 									<a href="#"><i class="glyphicon glyphicon-remove"></i></a>
 									<img src="assets/images/big-ben.jpg" />
 									<h6>Attraction Name</h6>
 									<div class="clearfix"></div>
-								</li>
-								<li>
-									<a href="#"><i class="glyphicon glyphicon-remove"></i></a>
-									<img src="assets/images/big-ben.jpg" />
-									<h6>Attraction Name</h6>
-									<div class="clearfix"></div>
-								</li>
+								</li> -->
 							</ul>
 						</div>
 					</div>
@@ -242,7 +268,7 @@
 			</section>
 		</div>
 			<div class="content">
-				<div ui-view></div>
+				<div id="ui-view" ui-view></div>
 			</div>
 			<!-- Contact -->
 			<!-- Footer -->

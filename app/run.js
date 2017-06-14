@@ -1,18 +1,17 @@
 
-function run( $rootScope) {
-	$rootScope.api = "http://localhost/xpozure/app/backend/api/";
-	$rootScope.cart = {};
+function run($cookies, $rootScope) {
+	$rootScope.api = "http://localhost/drupal/drupal-8.3.2/web/";
+	$rootScope.cart = [];
 
-	var ypos,image , parent;
-	function parallax() {
-		ypos = window.pageYOffset;
-		image = jQuery('.hero img');
-		jQuery(image).each(function() {
-			parent = jQuery(this).parent().parent().offset().top;
-			jQuery(this).css('top',  ((ypos- parent ) * .2)  + 'px');
-        });
-    }
-	window.addEventListener('scroll', parallax);
-	jQuery('#cart').popover();
-
+	var cart = $cookies.get('twinuk_user_selections');
+	if(cart != undefined) {
+		$rootScope.cart = JSON.parse(cart);
+	}
+	// $cookies.put('foo', 'ffff');
+	// var cart = $cookies.get('foo');
+	// console.log('foo');
+	// console.log($cookies.get('foo'));
+	// if(cart != undefined) {
+	// 	// $rootScope.cart = JSON.parse(cart);
+	// }
 }

@@ -1,8 +1,9 @@
-HomeController.$inject = ['$scope', '$http', '$state', '$rootScope', 'filterFilter'];
-function HomeController($scope, $http, $state, $rootScope, filterFilter) {
+HomeController.$inject = ['$cookies', '$scope', '$http', '$state', '$rootScope', 'filterFilter', 'CartService'];
+function HomeController($cookies, $scope, $http, $state, $rootScope, filterFilter, CartService) {
 
   var vm = this;
 
+  vm.loading = true;
   // Form Variables
   vm.homepage = {
     'search': {
@@ -12,7 +13,7 @@ function HomeController($scope, $http, $state, $rootScope, filterFilter) {
       },
       'when': {
         'value' : '',
-        'placeholder' : 'Anytime' 
+        'placeholder' : 'Anytime'
       },
       'duration': 0,
     },
@@ -81,12 +82,42 @@ $(function() {
       });
 });
 
+$cookies.put('foo', 'foobar');
+console.log($cookies.get( 'foo'));
 
+
+vm.init = init;
+
+function init() {
+  var url = $rootScope.api+'json/top-picks';
+
+  $http.get(url).then(function(response) {
+        vm.loading= false;
+        if(response.status = 200) {
+          console.log(response.data);
+          vm.homepage.attractions = response.data;
+          for(var i = 0; i < vm.homepage.attractions.length; i++) {
+            vm.homepage.attractions[i].thumbnails = vm.homepage.attractions[i].field_feature.split(",");
+          }
+        }
+  });
+
+}
+vm.init();
+
+vm.addAttraction = addAttraction;
+
+function addAttraction(attraction) {
+  CartService.AddAttraction(attraction);
+}
+function removeAttraction($index) {
+  CartService.RemoveAttraction($index);
+}
   // // var vm = this;
   //
   // // Init
-  // (function initController() {
-
+  (function initController() {
+    vm.init();
   //   //TO DO Init ajax call for data
   //   //     $http.get(url).then(function(response) {
   //   //       vm.homepage = response.data.message;
@@ -95,5 +126,5 @@ $(function() {
   //   //       console.log(url);
   //   //       vm.dataLoading = true;
   //   //     });
-// });
+  });
 }

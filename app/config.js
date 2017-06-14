@@ -40,7 +40,7 @@ function modalProvider($stateProvider) {
 		    }
         var attractionState = {
           name: 'attraction',
-	        url: '/attraction',
+	        url: '/attraction/{id}',
 		      templateUrl : "app/components/attraction/attraction.view.htm",
 		    }
         var searchState = {
