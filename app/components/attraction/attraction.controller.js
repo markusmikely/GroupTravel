@@ -32,9 +32,9 @@ function AttractionController($window, $cookies, $http, $stateParams, $rootScope
   vm.processAttraction = processAttraction;
 
   function processAttraction(attraction) {
-
+    console.log(attraction);
     var pAttraction = {
-      'id': attraction.nid,
+      'id': attraction.id,
       'title': attraction.title,
       'address': {
         'address1': attraction.field_address_address_line1,
@@ -88,12 +88,13 @@ function AttractionController($window, $cookies, $http, $stateParams, $rootScope
     $http.get(url).then(function(response) {
       vm.loading = false;
       if(response.status = 200) {
+        console.log(response);
         vm.attraction = vm.processAttraction(response.data[0]);
         vm.mainImage = vm.attraction.images[0];
         // vm.attraction.images = vm.attraction.field_feature_1.split(",");
         // vm.attraction.thumbnails = vm.attraction.field_feature.split(",");
 
-        console.log(response.data[0]);
+        console.log(response.data);
         // console.log('Home');
         // console.log(response.data.message.featured);
         // console.log(url);

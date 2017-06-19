@@ -30,9 +30,8 @@
 	<script src="https://code.angularjs.org/1.5.9/angular.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.js"></script>
 	<script type="text/javascript" src="https://code.angularjs.org/1.5.9/angular-cookies.min.js"></script>
-    <!-- <script type="text/javascript" src="https://code.angularjs.org/1.2.20/angular-cookies.min.js"></script> -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.5.9/angular-sanitize.min.js"></script>
-	<!-- <script type="text/javascript" src="node_modules/angular-sanitize/angular-sanitize.js"></script> -->
+	<script src="node_modules/angular-animate/angular-animate.min.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
 	<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
   <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
@@ -228,30 +227,34 @@
 				</div>
 			</header>
 			<section id="quote-management" ng-controller="SelectionController as vm">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-lg-3">
-							<button class="selection-btn"><i class="glyphicon glyphicon-heart"></i> <span>My selection</span></button>
-						</div>
-						<div class="col-lg-9">
-							<ul class="list-inline quote-stats pull-right">
-								<li class="days-needed">Attractions selected</li>
-								<li><span>{{cart.length}}</span></li>
-								<li class="days-needed">Days needed</li>
-								<li><span>3</span></li>
-								<li>
-									<div class="progress">
-									  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-									    <span class="sr-only">60% Complete</span>
-									  </div>
-									</div>
-								</li>
-								<li><button>Get Quote</button></li>
-							</ul>
-							<div class="clearfix"></div>
+				<div id="selection-summary">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-3">
+								<button class="selection-btn"><i class="glyphicon glyphicon-heart"></i> <span>My selection</span></button>
+							</div>
+							<div class="col-lg-9">
+								<ul class="list-inline quote-stats pull-right">
+									<li class="days-needed">Attractions selected</li>
+									<li><span>{{cart.length}}</span></li>
+									<li class="days-needed">Days needed</li>
+									<li><span>3</span></li>
+									<li>
+										<div class="progress">
+										  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+										    <span class="sr-only">60% Complete</span>
+										  </div>
+										</div>
+									</li>
+									<li><button>Get Quote</button></li>
+								</ul>
+								<div class="clearfix"></div>
+							</div>
 						</div>
 					</div>
-					<div id="selection" class="row" ng-if="selections" ng-init="selections = false">
+				</div>
+				<div id="selection-content" class="row animate-show" ng-show="selections" ng-init="selections = false">
+					<div id="selection">
 						<div class="col-lg-12 col-md-12">
 							<ul class="list-inline">
 								<li ng-repeat="attraction in cart">
@@ -260,18 +263,14 @@
 									<h6>{{attraction.Title}}</h6>
 									<div class="clearfix"></div>
 								</li>
-								<!-- <li>
-									<a href="#"><i class="glyphicon glyphicon-remove"></i></a>
-									<img src="assets/images/big-ben.jpg" />
-									<h6>Attraction Name</h6>
-									<div class="clearfix"></div>
-								</li> -->
+
 							</ul>
 						</div>
+						<div class="clearfix"></div>
 					</div>
-						<!-- this is a selection of attractions -->
-					</div>
-				<a ng-click="selections = !selections"><i class="glyphicon glyphicon-triangle-bottom"></i></a>
+
+				</div>
+				<a class="selection-toggle" ng-class="{'show-selection':selections}" ng-click="selections = !selections"><i class="glyphicon glyphicon-triangle-bottom"></i></a>
 			</section>
 		</div>
 			<div class="content">

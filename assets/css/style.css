@@ -7,6 +7,34 @@
 
 
 
+.animate-show {
+  /*line-height:20px;
+  opacity:1;*/
+  padding:0 15px;
+  height:178px;
+  overflow: hidden;
+}
+
+.animate-show.ng-hide-add.ng-hide-add-active,
+.animate-show.ng-hide-remove.ng-hide-remove-active {
+  -webkit-transition:all linear 0.2s;
+  transition:all linear 0.2s;
+}
+
+.animate-show.ng-hide {
+  /*line-height:0;
+  opacity:0;
+  padding:0 10px;*/
+  height:0;
+}
+.show-selection i {
+  -moz-transform: scaleY(-1);
+  -o-transform: scaleY(-1);
+  -webkit-transform: scaleY(-1);
+  transform: scaleY(-1);
+  filter: FlipW;
+  -ms-filter: "FlipW";
+}
 * {
     font-family: 'Lato', sans-serif;
     font-size: 18px;
@@ -350,7 +378,7 @@ section#quote-management {
   position: relative;
   z-index:1;
 }
-#quote-management > a {
+#quote-management a.selection-toggle {
   display: flex;
   background: white;
   height: 30px;
