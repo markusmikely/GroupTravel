@@ -1,4 +1,66 @@
-<div ng-controller="AttractionController as vm">
+<style>
+.large-image img {
+    width: 100%;
+}
+.large-image {
+    position: relative;
+}
+.large-image a {
+    position: absolute;
+    bottom: 0;
+    color: #228b96;
+    background: white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    left: 10px;
+    bottom: 10px;
+}
+.large-image a i {
+    font-size: 30px;
+}
+.thumbnail-images {
+    height: 200px;
+    display: block;
+    overflow: hidden;
+    margin-top: 10px;
+		position: relative;
+}
+.thumbnail-images ul {
+    width: 3000px;
+    max-width: initial;
+    height: 200px;
+		position: relative;
+		transition: all linear .3s;
+		-moz-transition: all linear .3s;
+		-webkit-transition: all linear .3s;
+
+}
+.thumbnail-images ul li {
+    width: 200px;
+}
+.thumbnail-images ul li img {
+    width: 200px;
+    height: 200px;
+}
+button.btn.btn-primary {
+    background: #771177;
+    border: 1px solid #771177;
+    border-radius: 0;
+    padding: 15px 30px;
+}
+.col-lg-4.related-attraction img {
+    width: 100%;
+    height: auto;
+}
+</style>
+
+<div id="attraction-{{vm.attraction.id}}" class="single-attraction" ng-controller="AttractionController as vm">
 	<!-- {{vm.attraction}} -->
 	<div class="container">
 		<div class="row">
@@ -16,25 +78,28 @@
 			</div>
 			<div ng-if="!vm.loading" class="fade-content">
 			 	<div class="col-lg-12">
-				<h1>{{vm.attraction.attraction}}</h1>
+				<h1>{{vm.attraction.title}}</h1>
 				<div class="experience-tags">
 					<ul class="list-inline">
-							<li><i class="tag1-icon"></i></li>
-							<li><i class="tag2-icon"></i></li>
-							<li><i class="tag3-icon"></i></li>
+							<li ng-repeat="xp in vm.attraction.experiences"><i class="tag1-icon"></i></li>
 					</ul>
 				</div>
 			</div>
 			<div class="col-lg-7 attraction-image">
 				<div class="large-image">
-					<img ng-src="{{vm.attraction.images[0]}}" />
+					<img ng-src="{{vm.mainImage}}" />
 					<a ng-click="vm.addAttraction(vm.attraction)"><i class="glyphicon glyphicon-heart"></i></a>
 				</div>
 				<div class="thumbnail-images">
-					<ul class="list-inline">
-						<li ng-repeat="image in vm.attraction.thumbnails" class="col-lg-4"><a href="#"><img ng-src="{{image}}" width="100%" /></a></li>
+					<ul ng-style="vm.thumbnailStyle" class="list-inline">
+						<li ng-repeat="image in vm.attraction.thumbnails" class="col-lg-4"><a ng-click="vm.setImage($index)"><img ng-src="{{image}}" width="100%" /></a></li>
 					</ul>
-
+					<span class="left carousel-control" ng-click="vm.movePosition('left')">
+							 <span class="glyphicon glyphicon-chevron-left"></span>
+					 </span>
+					 <span class="right carousel-control" ng-click="vm.movePosition('right')">
+							<span class="glyphicon glyphicon-chevron-right"></span>
+					 </span>
 				</div>
 			</div>
 			<div class="col-lg-5 attraction-description">
@@ -45,7 +110,7 @@
 					{{vm.attraction.field_address_country_code}}
 					{{vm.attraction.field_address_postal_code}}
 				</address>
-				<button class="btn btn-primary">Add to selection</section>
+				<button ng-click="vm.addAttraction(vm.attraction)" class="btn btn-primary">Add to selection</section>
 			</div>
 			<div class="col-lg-12 attraction-location">
 				<h3>Location</h3>
@@ -57,7 +122,13 @@
 			<div class="col-lg-12 related-attractions">
 				<h2>You might also like:</h2>
 			</div>
-			<div class="col-lg-4 related-attraction">
+			<div ng-repeat="related in vm.related" class="col-lg-4 related-attraction">
+				<a ui-sref="attraction({id: related.nid})"><img ng-src="{{related.field_feature}}" /></a>
+				<a ui-sref="attraction({id: related.nid})"><h3>{{related.title}}</h3></a>
+				<div ng-bind-html="related.body | unsafe"></div>
+				<!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque leo lorem, sagittis eget dictum vitae, ornare eu dui. Vestibulum nisl augue, aliquam ac aliquet ut, condimentum sit amet augue. Nullam vitae cursus arcu. Sed fringilla eget ligula id egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec sed cursus sapien. Duis dictum vestibulum convallis.</p> -->
+			</div>
+			<!-- <div class="col-lg-4 related-attraction">
 				<img src="http://placehold.it/300x300" />
 				<h3>Heading</h3>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque leo lorem, sagittis eget dictum vitae, ornare eu dui. Vestibulum nisl augue, aliquam ac aliquet ut, condimentum sit amet augue. Nullam vitae cursus arcu. Sed fringilla eget ligula id egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec sed cursus sapien. Duis dictum vestibulum convallis.</p>
@@ -66,12 +137,7 @@
 				<img src="http://placehold.it/300x300" />
 				<h3>Heading</h3>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque leo lorem, sagittis eget dictum vitae, ornare eu dui. Vestibulum nisl augue, aliquam ac aliquet ut, condimentum sit amet augue. Nullam vitae cursus arcu. Sed fringilla eget ligula id egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec sed cursus sapien. Duis dictum vestibulum convallis.</p>
-			</div>
-			<div class="col-lg-4 related-attraction">
-				<img src="http://placehold.it/300x300" />
-				<h3>Heading</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque leo lorem, sagittis eget dictum vitae, ornare eu dui. Vestibulum nisl augue, aliquam ac aliquet ut, condimentum sit amet augue. Nullam vitae cursus arcu. Sed fringilla eget ligula id egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec sed cursus sapien. Duis dictum vestibulum convallis.</p>
-			</div>
+			</div> -->
 		</div>
 	</div>
 	</div>

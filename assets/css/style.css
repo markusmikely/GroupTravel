@@ -310,13 +310,13 @@ header a.logo img {
   width: 100%;
   padding: 0;
   margin: 0;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background:url(../images/hero-home.jpg);
+  background: url(../images/hero-home.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 section#hero .btn-default {
     font-size: 1.5em;
@@ -400,6 +400,20 @@ section#quote-management {
 }
 .content {
     padding: 0;
+}
+div.single-attraction {
+    padding: 40px 0;
+}
+
+div.single-attraction h1 {
+    margin-bottom: 10px;
+}
+.experience-tags li i {
+    width: 25px;
+    height: 25px;
+    background: #228b96;
+    display: block;
+    border-radius: 50%;
 }
 
 #selection ul li i {
@@ -810,7 +824,7 @@ footer ul li {margin-bottom: 10px;}
 }
 
 .content {
-    margin-top: 159px;
+    margin-top: 144px;
 }
 
 /* Classes */

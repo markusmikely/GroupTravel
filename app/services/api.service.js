@@ -1,6 +1,6 @@
 ApiService.$inject = ['$http'];
 function ApiService($http) {
-    
+
     return {
         get: function(url) {
             return $http.get(url);
@@ -8,5 +8,5 @@ function ApiService($http) {
         put: function(url, data) {
             return $http.put(url, data);
         }
-    };       
+    };
 };

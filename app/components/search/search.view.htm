@@ -208,6 +208,72 @@ section#content
 {
     height: 100%;
 }
+ul.pagination li a, ul.pagination li > span {
+    border-radius: 50% !important;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #228b96;
+    font-weight: 400;
+    padding: 0;
+    border: 2px solid #228b96!important;
+    margin: 0 5px;
+    transition: all linear .2s;
+    -webkit-transition: all linear .2s;
+    -moz-transition: all linear .2s;
+    line-height:1;
+}
+
+ul.pagination li {
+    padding: 0 10px;
+}
+
+ul.pagination li a span {
+    border: none !important;
+}
+
+.pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus, .pagination>li>span:hover,.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    color: white;
+    background: #228b96;
+}
+.attraction-filter-dropdown {
+    padding: 10px 0;
+}
+.attraction-filter-dropdown ul {
+  height: auto;
+  border: none;
+}
+.attraction-filter-dropdown ul li {
+  position: relative;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.attraction-filter-dropdown ul li:after {
+  clear:both;
+}
+.attraction-filter-dropdown li a {
+  text-transform: capitalize;
+  padding: 5px 10px;
+  display: initial;
+  color: #228b96;
+  border-radius: 20px;
+  font-weight: 400;
+  box-shadow: none !important;
+  border: none;
+  transition:all linear .2s;
+  -webkit-transition:all linear .2s;
+  -moz-transition:all linear .2s;
+}
+.attraction-filter-dropdown li a:hover, .attraction-filter-dropdown li a:focus, .attraction-filter-dropdown li a.selected {
+    background: #228b96;
+    color: white;
+}
 /*div#map-view.navbar-fixed-top, div#map-view.navbar-fixed-bottom { position:initial !important; }*/
 </style>
 <!--  Content -->
@@ -220,11 +286,19 @@ section#content
 		<div id="results-filter">
 			<div class="attraction-form form form-inline">
 				<ul class="list-inline">
-					<li class="col-lg-3"><a href="#">Where to: within 5 miles of London <i class="glyphicon glyphicon-menu-down"></i></a></li>
+					<li class="col-lg-3"><a href="#">Location: London <i class="glyphicon glyphicon-menu-down"></i></a></li>
 					<li class="col-lg-3"><a href="#">When:Anything <i class="glyphicon glyphicon-menu-down"></i></a></li>
-					<li class="col-lg-3"><a href="#">Duration: 5 selected <i class="glyphicon glyphicon-menu-down"></i></a></li>
+					<li class="col-lg-3"><a href="#">Experiences: {{vm.countSelected}} selected <i class="glyphicon glyphicon-menu-down"></i></a></li>
 					<li class="col-lg-3"><a class="highlight" href="#">Our Packages <i class="glyphicon glyphicon-menu-down"></i></a></li>
 				</ul>
+        <!-- <div class="attraction-filter-dropdown">
+          <ul class="list-inline">
+            <li class="col-lg-2" ng-repeat="tag in vm.experiences">
+              <div><a ng-class="{'selected': tag.selected}" ng-click="vm.selectTag(tag)">{{tag.name}}</a></div>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div> -->
 			</div>
 		</div>
 	  <div id="results-view">
@@ -268,19 +342,23 @@ section#content
        <!-- pager -->
        <ul ng-if="vm.pager.pages.length" class="pagination">
            <li ng-class="{disabled:vm.pager.currentPage === 1}">
-               <a ng-click="vm.setPage(1)">First</a>
+             <span aria-hidden="true">&laquo;</span>
            </li>
            <li ng-class="{disabled:vm.pager.currentPage === 1}">
-               <a ng-click="vm.setPage(vm.pager.currentPage - 1)">Previous</a>
+               <a ng-click="vm.setPage(vm.pager.currentPage - 1)">
+                &lsaquo;
+               </a>
            </li>
            <li ng-repeat="page in vm.pager.pages" ng-class="{active:vm.pager.currentPage === page}">
                <a ng-click="vm.setPage(page)">{{page}}</a>
            </li>
            <li ng-class="{disabled:vm.pager.currentPage === vm.pager.totalPages}">
-               <a ng-click="vm.setPage(vm.pager.currentPage + 1)">Next</a>
+               <a ng-click="vm.setPage(vm.pager.currentPage + 1)">&rsaquo;</a>
            </li>
            <li ng-class="{disabled:vm.pager.currentPage === vm.pager.totalPages}">
-               <a ng-click="vm.setPage(vm.pager.totalPages)">Last</a>
+               <a ng-click="vm.setPage(vm.pager.totalPages)">
+                 <span aria-hidden="true">&raquo;</span>
+               </a>
            </li>
        </ul>
 		 </div>
