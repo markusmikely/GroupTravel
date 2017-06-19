@@ -1,5 +1,5 @@
 // , 'ngAffix', 'ngSanitize',  ,  'ui.bootstrap'
-var app= angular.module("twinApp", ['ngCookies', 'ui.router'])
+var app= angular.module("twinApp", ['ngCookies', 'ui.router', 'ngMap'])
 	.provider('modalState', modalProvider)
   .run(run)
 	.config(config)

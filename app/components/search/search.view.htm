@@ -274,13 +274,35 @@ ul.pagination li a span {
     background: #228b96;
     color: white;
 }
+ng-map {
+    position: ABSOLUTE;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height:100% !important;
+}
 /*div#map-view.navbar-fixed-top, div#map-view.navbar-fixed-bottom { position:initial !important; }*/
 </style>
 <!--  Content -->
 <!-- bs-affix  onerror="" data-offset-bottom="375" data-spy="affix" -->
 <section id="content" ng-controller="SearchController as vm">
-	<div id="map-view" affix start-class="affix-start" stop-class="affix-stop" offset="0" stop-element="footer">
-		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.5391499026014!2d-0.12173704886296358!3d51.50332397953459!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604b900d26973%3A0x4291f3172409ea92!2sCoca+Cola+London+Eye!5e0!3m2!1sen!2suk!4v1496947306981" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+  <div id="map-view" affix start-class="affix-start" stop-class="affix-stop" offset="0" stop-element="footer">
+    <ng-map default-style="true" zoom="2">
+      <marker id='{{attraction.id}}' position="{{[attraction.coordinates.lat, attraction.coordinates.lng]}}"
+        ng-repeat="attraction in vm.items[0].concat(vm.items[1]).concat(vm.items[2])"
+        on-click="vm.showDetail(attraction)">
+      </marker>
+
+      <info-window id="foo-iw" style="background:red;">
+        <div ng-non-bindable="" class="iw">
+          <b>{{vm.attraction.title}}</b><br>
+          <span>{{vm.attraction.location.city}}, {{vm.attraction.location.postcode}}</span>
+          <a href="{{vm.attraction.id}}"><i class="glyphicon glyphicon-eye-open"></i></a>
+        </div>
+      </info-window>
+    </ng-map>
 	</div>
 	<div id="results">
 		<div id="results-filter">
@@ -304,7 +326,7 @@ ul.pagination li a span {
 	  <div id="results-view">
       <!-- items being paged -->
       <div class="col-lg-4" ng-repeat="items in vm.items">
-        <div ng-class="{'featured': ($parent.$index == 0 && $index == 1 || $parent.$index == 1 && $index == 2 || $parent.$index == 2 && $index == 3)}" ng-repeat="item in items" id="attraction-{{item.nid}}" class="attraction">
+        <div ng-mouseover="vm.showDetail($event, item)" ng-class="{'featured': ($parent.$index == 0 && $index == 1 || $parent.$index == 1 && $index == 2 || $parent.$index == 2 && $index == 3)}" ng-repeat="item in items" id="attraction-{{item.nid}}" class="attraction">
          <div id="attraction-carousel-{{item.nid}}" class="carousel slide" data-ride="carousel">
            <!-- Wrapper for slides -->
            <div class="carousel-inner" role="listbox">
