@@ -1,0 +1,133 @@
+<!-- Wrapper -->
+<div id="wrapper">
+  <div id="page">
+    <div affixer class="affixed">
+      <!-- Header -->
+      <header id="header">
+        <div id="main-menu">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12 text-center">
+                <div id="logo" class="pull-left">
+                  <a ui-sref="home">
+                    <img class="pull-left" src="assets/images/logo.jpg" height="60px">
+                    <h1>Group Travel</h1>
+                    <div class="clearfix"></div>
+                  </a>
+                </div>
+                <ul id="menu" class="list-inline text-center">
+                  <li>
+                    <a>Your Trip</a>
+                    <div>
+                      <div class="col-lg-3">
+                        <h3>Your Trip</h3>
+                      </div>
+                      <div class="col-lg-3">
+                        <h4><a>Locations</a></h4>
+                        <ul class="list-unstyled">
+                          <li><a>Location 1</a></li>
+                          <li><a>Location 2</a></li>
+                          <li><a>Location 3</a></li>
+                          <li><a class="purple">Explore All</a></li>
+                        </ul>
+                      </div>
+                      <div class="col-lg-3">
+                        <h4><a>Attractions</a></h4>
+                        <ul class="list-unstyled">
+                          <li><a>Attraction 1</a></li>
+                          <li><a>Attraction 2</a></li>
+                          <li><a>Attraction 3</a></li>
+                          <li><a class="purple">Explore All</a></li>
+                        </ul>
+                      </div>
+                      <div class="col-lg-3">
+                        <h4><a>Expericences</a></h4>
+                        <ul class="list-unstyled">
+                          <li><a>Experience 1</a></li>
+                          <li><a>Experience 2</a></li>
+                          <li><a>Experience 3</a></li>
+                          <li><a class="purple">Explore All</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <a>Our Products</a>
+                    <div>
+                      <div class="col-lg-3">
+                        <h3>Our Products</h3>
+                      </div>
+                      <div class="col-lg-3">
+                        <h4><a>Our Products</a></h4>
+                        <ul class="list-unstyled">
+                          <li><a>Our Packages</a></li>
+                          <li><a>School Integration</a></li>
+                          <li><a>Special Offers</a></li>
+                          <li><a>Bespoke Tours</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <a>Our Quality</a>
+                    <div>
+                      <div class="col-lg-3">
+                        <h3>Our Quality</h3>
+                      </div>
+                      <div class="col-lg-3">
+                        <h4><a>Our Quality</a></h4>
+                        <ul class="list-unstyled">
+                          <li><a>Saftey</a></li>
+                          <li><a>Accommodation</a></li>
+                          <li><a>About Us</a></li>
+                          <li><a>FAQs</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <a>Working with us</a>
+                    <div>
+                      <div class="col-lg-3">
+                        <h3>Working with us</h3>
+                      </div>
+                      <div class="col-lg-3">
+                        <h4><a>Our Quality</a></h4>
+                        <ul class="list-unstyled">
+                          <li><a>I am an agent</a></li>
+                          <li><a>I am an LO</a></li>
+                          <li><a>I am a homestay host</a></li>
+                          <li><a>I am a school based in the UK</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <a>Contact Us</a>
+                    <div>
+                      <div class="col-lg-3">
+                        <h3>Contact Us</h3>
+                      </div>
+                      <div class="col-lg-3">
+                        <h4><a>Contact Us</a></h4>
+                        <ul class="list-unstyled">
+                          <li><a>I want to ask a question</a></li>
+                          <li><a>I want to request an invoice</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+                <button id="showMenu" ng-click="vm.showmenu = true" class="visible-xs">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div ng-include src="'app/components/layout/cart/cart.view.htm'"></div>    
+    </div>
+    <div class="content">

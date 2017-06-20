@@ -1,0 +1,101 @@
+div.auto-complete-container {
+	border: 1px solid lightsteelblue;
+	background-color: #cccccc;
+	white-space: nowrap;
+}
+
+div.auto-complete-container.unselectable {
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+
+div.auto-complete-absolute-container {
+	position: absolute;
+	z-index: 10000;
+}
+
+div.auto-complete-container ul.auto-complete-results {
+	overflow-x: hidden;
+	overflow-y: auto;
+	margin: 0px;
+	padding: 0px;
+}
+
+	div.auto-complete-container ul.auto-complete-results li.auto-complete-item {
+		list-style-type: none;
+		padding: 8px 5px;
+		background-color: #efefef;
+		cursor: pointer;
+		font-weight: bold;
+	}
+
+	div.auto-complete-container ul.auto-complete-results li:not(:first-child) {
+		margin-top: 1px;
+	}
+
+	div.auto-complete-container ul.auto-complete-results li.auto-complete-item:hover {
+		background-color: #6699FF;
+		color: White;
+	}
+
+	div.auto-complete-container ul.auto-complete-results li.auto-complete-item-selected {
+		background-color: #6699FF;
+		color: White;
+	}
+
+
+div.auto-complete-container table.auto-complete {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 0px;
+	border-width: 0px;
+	border-style: none;
+}
+
+	div.auto-complete-container table.auto-complete tr {
+		white-space: nowrap;
+		text-align: left;
+	}
+
+	div.auto-complete-container table.auto-complete tbody tr > td {
+		padding: 0px;
+		background-color: transparent;
+		border-width: 0px;
+	}
+
+  .k-animation-container {
+      padding: 0 !important;
+      margin: 0 !important;
+      border:none !important;
+      box-shadow:none !important;
+  }
+  .k-popup>.k-group-header, .k-popup>.k-virtual-wrap>.k-group-header,
+  .k-popup .k-list .k-item>.k-group {
+      text-align: left;
+      background: white;
+      color: #121212;
+      font-size: 12px !important;
+      font-weight: 400;
+  }
+  .k-list-scroller ul li {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      background: white;
+  }
+  .k-list-scroller ul,
+  .k-list-scroller {
+      border: none !important;
+  }
+  .k-list-scroller ul li.k-item {
+      border: none !important;
+      box-shadow: none !important;
+      border-bottom: 1px solid #eee !important;
+  }
+  .k-list-scroller ul li.k-item:hover,
+  .k-list-scroller ul li.k-item:focus,
+  .k-list-scroller ul li.k-state-focused {
+      background:#e8e8e8 !important;
+  }

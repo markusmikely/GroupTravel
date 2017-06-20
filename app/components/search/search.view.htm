@@ -1,366 +1,73 @@
-<!-- ***** Search View ***** -->
-<style>
-  /* remove once images are resized corrctly */
-  .carousel-inner>.item>a>img, .carousel-inner>.item>img {
-      width: 100%;
-      height: 225px;
-  }
-</style>
-<style>
-section#content {
-    padding: 0;
-}
-
-.content {
-    margin-top: 159px;
-}
-
-section#content {
-    position: relative;
-    width: 100%;
-    /*height: 500px;*/
-}
-
-
-/*div#map-view {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 50%;
-	bottom: 0;
-	height: 100%;
-	width: 50%;
-}*/
-
-div#content-view {
-	background: red;
-	position: relative;
-	top: 0;
-	left: 50%;
-	width: 50%;
-	right: 0;
-	bottom: 0;
-	padding: 0 20px;
-}
-iframe {
-    position: ABSOLUTE;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-i.xp-icon {
-  width: 20px;
-  height: 20px;
-  display: block;
-  border: 1px solid #228b96;
-  border-radius: 50%;
-  overflow: hidden;
-  background: white;
-  padding: 0 !important;
-  text-indent: 10000px;
-  margin-bottom: 5px;
-}
-.attraction.featured p {
-    font-size: 14px;
-		clear:both;
-}
-div#map-view {
-    /*position: fixed;*/
-    /*top: 159px;*/
-    left: 0;
-    bottom: 0;
-    height: 100%;
-    width: 34%;
-    background: yellow;
-    z-index: 1;
-}
-.attraction.featured {
-    height: 532px;
-    clear: both;
-		background: #f6f6f6;
-		padding: 7px;
-}
-div#results-filter {
-	height: 50px;
-	background: white;
-	position: fixed;
-	z-index: 5;
-	top: 159px;
-	left: 34%;
-	right: 0;
-}
-#results-filter .attraction-form.form.form-inline {
-    padding: 0;
-    width: 100%;
-}
-.attraction-form ul {
-    border-bottom: 1px solid #e8e8e8;
-    height: 50px;
-    margin: 0;
-    width: 100%;
-}
-.attraction-form li a {
-    height: 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-right: 1px solid #e8e8e8;
-    font-size: 14px;
-    position: relative;
-    padding-right: 30px;
-}
-.attraction-form li a i {
-    position: absolute;
-    right: 15px;
-    top: 20px;
-    color: #228b96;
-    font-weight: 100;
-    font-size: 12px;
-}
-.attraction {
-    background: white;
-    margin-bottom: 20px;
-}
-#results {
-    position: relative;
-    left: 34%;
-    width: 66%;
-}
-div#results-view {
-    position: relative;
-}
-.attraction-info {
-    width: 70%;
-    float: left;
-    padding: 0 0 5px;
-}
-ul.xp-tags.list-inline {
-    width: 30%;
-    float: right;
-}
-.attraction-info h4 {
-  margin: 0;
-  text-align: left;
-  line-height: 1.2;
-}
-a.attraction-location {
-  font-size: 12px;
-  clear: both;
-  display: block;
-  text-align: left;
-  margin: 0 0 10px;
-}
-ul.xp-tags.list-inline li {
-    padding: 0 0 0 5px;
-    float: right;
-}
-.carousel {
-    position: relative;
-}
-.attraction {
-    clear: both;
-}
-.attraction .carousel {
-    margin-bottom: 10px;
-}
-a.attraction-title {
-    display: block;
-    float: left;
-    margin-bottom: 5px;
-}
-a.highlight {
-    font-weight: 400;
-    color: #228b96;
-    text-transform: uppercase;
-}
-div#map-view {
-  position: relative;
-}
-div#map-view.affix-bottom {
-    position: relative;
-    -webkit-backface-visibility: hidden !important;
-
-}
-div#map-view {
-    position: absolute;
-}
-div#map-view.affix-start {
-    position: fixed;
-    top: 159px;
-}
-div#map-view.affix-stop {
-    position: absolute;
-    top: 0;
-}
-div#results {
-  position: relative;
-  padding-top: 70px;
-  height: 100%;
-  overflow: scroll;
-}
-div#wrapper,
-div#page,
-.content,
-div#ui-view,
-section#content
-{
-    height: 100%;
-}
-ul.pagination li a, ul.pagination li > span {
-    border-radius: 50% !important;
-    height: 40px;
-    width: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #228b96;
-    font-weight: 400;
-    padding: 0;
-    border: 2px solid #228b96!important;
-    margin: 0 5px;
-    transition: all linear .2s;
-    -webkit-transition: all linear .2s;
-    -moz-transition: all linear .2s;
-    line-height:1;
-}
-
-ul.pagination li {
-    padding: 0 10px;
-}
-
-ul.pagination li a span {
-    border: none !important;
-}
-
-.pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus, .pagination>li>span:hover,.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
-    color: white;
-    background: #228b96;
-}
-.attraction-filter-dropdown {
-    padding: 10px 0;
-}
-.attraction-filter-dropdown ul {
-  height: auto;
-  border: none;
-}
-.attraction-filter-dropdown ul li {
-  position: relative;
-  height: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.attraction-filter-dropdown ul li:after {
-  clear:both;
-}
-.attraction-filter-dropdown li a {
-  text-transform: capitalize;
-  padding: 5px 10px;
-  display: initial;
-  color: #228b96;
-  border-radius: 20px;
-  font-weight: 400;
-  box-shadow: none !important;
-  border: none;
-  transition:all linear .2s;
-  -webkit-transition:all linear .2s;
-  -moz-transition:all linear .2s;
-}
-.attraction-filter-dropdown li a:hover, .attraction-filter-dropdown li a:focus, .attraction-filter-dropdown li a.selected {
-    background: #228b96;
-    color: white;
-}
-ng-map {
-    position: ABSOLUTE;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height:100% !important;
-}
-/*div#map-view.navbar-fixed-top, div#map-view.navbar-fixed-bottom { position:initial !important; }*/
-</style>
-<!--  Content -->
-<!-- bs-affix  onerror="" data-offset-bottom="375" data-spy="affix" -->
 <section id="content" ng-controller="SearchController as vm">
-
-  <div id="map-view" affix start-class="affix-start" stop-class="affix-stop" offset="0" stop-element="footer">
-    <ng-map default-style="true" zoom="2">
-      <marker id='{{attraction.id}}' position="{{[attraction.coordinates.lat, attraction.coordinates.lng]}}"
-        ng-repeat="attraction in vm.items[0].concat(vm.items[1]).concat(vm.items[2])"
-        on-click="vm.showDetail(attraction)">
-      </marker>
-
-      <info-window id="foo-iw" style="background:red;">
-        <div ng-non-bindable="" class="iw">
-          <b>{{vm.attraction.title}}</b><br>
-          <span>{{vm.attraction.location.city}}, {{vm.attraction.location.postcode}}</span>
-          <a href="{{vm.attraction.id}}"><i class="glyphicon glyphicon-eye-open"></i></a>
-        </div>
-      </info-window>
-    </ng-map>
+    <div id="map-view">
+        <div>
+            <ng-map default-style="true" zoom="2">
+                <marker id='{{attraction.id}}' position="{{[attraction.coordinates.lat, attraction.coordinates.lng]}}"
+                  ng-repeat="attraction in vm.items"
+                  on-click="vm.showDetail(attraction)"
+                  icon="{
+                    path: 'M409.133,109.203c-19.608-33.592-46.205-60.189-79.798-79.796C295.736,9.801,259.058,0,219.273,0   c-39.781,0-76.47,9.801-110.063,29.407c-33.595,19.604-60.192,46.201-79.8,79.796C9.801,142.8,0,179.489,0,219.267   c0,39.78,9.804,76.463,29.407,110.062c19.607,33.592,46.204,60.189,79.799,79.798c33.597,19.605,70.283,29.407,110.063,29.407   s76.47-9.802,110.065-29.407c33.593-19.602,60.189-46.206,79.795-79.798c19.603-33.596,29.403-70.284,29.403-110.062  C438.533,179.485,428.732,142.795,409.133,109.203z M353.742,297.208c-13.894,23.791-32.736,42.633-56.527,56.534   c-23.791,13.894-49.771,20.834-77.945,20.834c-28.167,0-54.149-6.94-77.943-20.834c-23.791-13.901-42.633-32.743-56.527-56.534   c-13.897-23.791-20.843-49.772-20.843-77.941c0-28.171,6.949-54.152,20.843-77.943c13.891-23.791,32.738-42.637,56.527-56.53   c23.791-13.895,49.772-20.84,77.943-20.84c28.173,0,54.154,6.945,77.945,20.84c23.791,13.894,42.634,32.739,56.527,56.53   c13.895,23.791,20.838,49.772,20.838,77.943C374.58,247.436,367.637,273.417,353.742,297.208z',
+                    fillColor: 'white',
+                    fillOpacity: 1,
+                    scale: 0.05,
+                    strokeColor: 'purple',
+                    strokeWeight: 2
+                  }"
+                </marker>
+                <info-window id="foo-iw" style="background:red;" ng-click="count = count + 1" ng-init="count=0">
+                    <div ng-non-bindable="" class="iw"
+                      ng-mouseover="vm.focusOnResult(vm.attraction)"
+                      ng-mouseout="vm.cancelFocus(vm.attraction)">
+                      <b >{{vm.attraction.title}}</b>
+                      <span>{{vm.attraction.location.city}}, {{vm.attraction.location.postcode}}</span>
+                      <a href="{{vm.attraction.id}}"><i class="glyphicon glyphicon-eye-open"></i></a>
+                    </div>
+                </info-window>
+            </ng-map>
+      </div>
 	</div>
 	<div id="results">
-		<div id="results-filter">
-			<div class="attraction-form form form-inline">
-				<ul class="list-inline">
-					<li class="col-lg-3"><a href="#">Location: London <i class="glyphicon glyphicon-menu-down"></i></a></li>
-					<li class="col-lg-3"><a href="#">When:Anything <i class="glyphicon glyphicon-menu-down"></i></a></li>
-					<li class="col-lg-3"><a href="#">Experiences: {{vm.countSelected}} selected <i class="glyphicon glyphicon-menu-down"></i></a></li>
-					<li class="col-lg-3"><a class="highlight" href="#">Our Packages <i class="glyphicon glyphicon-menu-down"></i></a></li>
-				</ul>
-        <!-- <div class="attraction-filter-dropdown">
-          <ul class="list-inline">
-            <li class="col-lg-2" ng-repeat="tag in vm.experiences">
-              <div><a ng-class="{'selected': tag.selected}" ng-click="vm.selectTag(tag)">{{tag.name}}</a></div>
-            </li>
-          </ul>
-          <div class="clearfix"></div>
-        </div> -->
-			</div>
-		</div>
-	  <div id="results-view">
-      <!-- items being paged -->
-      <div class="col-lg-4" ng-repeat="items in vm.items">
-        <div ng-mouseover="vm.showDetail($event, item)" ng-class="{'featured': ($parent.$index == 0 && $index == 1 || $parent.$index == 1 && $index == 2 || $parent.$index == 2 && $index == 3)}" ng-repeat="item in items" id="attraction-{{item.nid}}" class="attraction">
-         <div id="attraction-carousel-{{item.nid}}" class="carousel slide" data-ride="carousel">
-           <!-- Wrapper for slides -->
-           <div class="carousel-inner" role="listbox">
-             <div ng-repeat="image in item.thumbnails" ng-class="{'active':$index == 0}" class="item">
-               <img ng-src="{{image}}" />
-             </div>
-           </div>
-           <!-- Controls -->
-           <span class="left carousel-control" data-target="#attraction-carousel-{{item.nid}}" data-slide="prev">
+	    <div id="results-filter">
+			    <div class="attraction-form form form-inline">
+				      <ul class="list-inline">
+    					    <li class="col-lg-3"><a href="#">Location: London <i class="glyphicon glyphicon-menu-down"></i></a></li>
+    					    <li class="col-lg-3"><a href="#">When:Anything <i class="glyphicon glyphicon-menu-down"></i></a></li>
+    					    <li class="col-lg-3"><a href="#">Experiences: {{vm.countSelected}} selected <i class="glyphicon glyphicon-menu-down"></i></a></li>
+    					    <li class="col-lg-3"><a class="highlight" href="#">Our Packages <i class="glyphicon glyphicon-menu-down"></i></a></li>
+      				</ul>
+          </div>
+		  </div>
+	    <div id="results-view">
+        <div class="col-lg-4" ng-repeat="item in vm.items">
+          <div ng-mouseover="vm.showDetail($event, item)" ng-class="{'focus':item.focus}" ng-class="{'featured':item.featured}"  id="attraction-{{item.id}}" class="attraction">
+            <div id="attraction-carousel-{{item.nid}}" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner" role="listbox">
+                <div ng-repeat="image in item.thumbnails" ng-class="{'active':$index == 0}" class="item">
+                  <img ng-src="{{image}}" />
+                </div>
+              </div>
+              <!-- Controls -->
+              <span class="left carousel-control" data-target="#attraction-carousel-{{item.nid}}" data-slide="prev">
                 <span class="glyphicon glyphicon-chevron-left"></span>
-            </span>
-            <span class="right carousel-control" data-target="#attraction-carousel-{{item.nid}}" data-slide="next">
-               <span class="glyphicon glyphicon-chevron-right"></span>
-            </span>
-         </div>
-        <div class="attraction-info">
-          <a class="attraction-title" href="#"><h4>{{item.title}}</h4></a>
-          <a class="attraction-location" href="#">{{item.field_address_postal_code}} {{item.field_address_sorting_code}}, {{item.field_address_country_code}}</a>
-        </div>
-         <ul class="xp-tags list-inline">
-           <li ng-repeat="xp in item.experiences"><a href="#"><i class="xp-icon">{{xp}}</i></a></li>
-         </ul>
-         <div ng-bind-html="item.body | unsafe" class="text-left" ng-if="($parent.$index == 0 && $index == 1 || $parent.$index == 1 && $index == 2 || $parent.$index == 2 && $index == 3)">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin feugiat justo ut cursus convallis. Morbi eget nisi et nisi condimentum semper. Mauris non arcu ac elit pulvinar commodo id elementum nisi. Integer vestibulum arcu in consequat ultricies. Vestibulum neque velit, ultrices sit amet.  Mauris non arcu ac elit pulvinar commodo id elementum nisi. Integer vestibulum arcu in consequat ultricies. Vestibulum neque velit, ultrices sit amet.</div>
-
-       </div>
+              </span>
+              <span class="right carousel-control" data-target="#attraction-carousel-{{item.nid}}" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+              </span>
+            </div>
+            <div class="attraction-info">
+              <a class="attraction-title" href="#"><h4>{{item.title}}</h4></a>
+              <a class="attraction-location" href="#">{{item.field_address_postal_code}} {{item.field_address_sorting_code}}, {{item.field_address_country_code}}</a>
+            </div>
+            <ul class="xp-tags list-inline">
+              <li ng-repeat="xp in item.experiences"><a href="#"><i class="xp-icon">{{xp}}</i></a></li>
+            </ul>
+            <div class="clearfix"></div>
       </div>
-
+      </div>
       <div class="clearfix"></div>
     </div>
 	 	 <!-- Pagination -->
 		 <div id="results-pagination" class="text-center">
-
-
-
        <!-- pager -->
        <ul ng-if="vm.pager.pages.length" class="pagination">
            <li ng-class="{disabled:vm.pager.currentPage === 1}">
@@ -381,10 +88,9 @@ ng-map {
                <a ng-click="vm.setPage(vm.pager.totalPages)">
                  <span aria-hidden="true">&raquo;</span>
                </a>
-           </li>
-       </ul>
-		 </div>
+             </li>
+         </ul>
+		   </div>
 	  </div>
   </div>
-
 </section>

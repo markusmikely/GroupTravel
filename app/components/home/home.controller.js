@@ -3,59 +3,6 @@ function HomeController($cookies, $scope, $http, $state, $rootScope, filterFilte
 
   var vm = this;
 
-  vm.positions = [
-  [54.779951, 9.334164], [47.209613, 15.991539],
-  [51.975343, 7.596731], [51.97539, 7.596962],
-  [47.414847, 8.23485], [47.658028, 9.159596],
-  [47.525927, 7.68761], [50.85558, 9.704403],
-  [54.320664, 10.285977], [49.214374, 6.97506],
-  [52.975556, 7.596811], [52.975556, 7.596811],
-  [52.975556, 7.596811], [52.975556, 7.596811],
-  [52.975556, 7.596811], [52.975556, 7.596811],
-  [52.975556, 7.596811], [52.975556, 7.596811],
-  [52.975556, 7.596811], [52.975556, 7.596811]];
-
-  // ATTRIBUTES
-  vm.loading = true;
-  vm.homepage = {
-    'search': {
-      'where': {
-        'value' : '',
-        'placeholder' : 'Anywhere'
-      },
-      'when': {
-        'value' : '',
-        'placeholder' : 'Anytime'
-      },
-      'duration': 0,
-    },
-    'data': {
-      'attractions': [],
-      'selections': []
-    }
-  };
-  $scope.selectedUser = '';
-
-  var users = [{
-    name: 'The London Eye',
-    group: "Attraction"
-  }, {
-    name: 'Westminster Palace',
-    group: "Attraction"
-  }, {
-    name: 'Buckingham Palace',
-    group: "Attraction"
-  }, {
-    name: 'London',
-    group: "Location"
-  }, {
-    name: 'Manchester',
-    group: "Location"
-  },
-  {
-    name: 'Oxford',
-    group: "Location"
-  }];
   // FUNCTIONS
   vm.init = init;
 
@@ -69,28 +16,54 @@ function HomeController($cookies, $scope, $http, $state, $rootScope, filterFilte
   vm.getTerms = getTerms;
   vm.addAttraction = addAttraction;
 
+  vm.search = search;
 
-  vm.init();
+
+
+    // Init
+    (function initController() {
+      vm.init();
+      $( "#datepicker" ).datepicker();
+    
+
+    })();
+
+    // ATTRIBUTES
+    vm.loading = true;
+    vm.homepage = {
+      'search': {
+        'where': {
+          'value' : '',
+          'placeholder' : 'Anywhere'
+        },
+        'when': {
+          'value' : '',
+          'placeholder' : 'Anytime'
+        },
+        'duration': 0,
+      },
+      'data': {
+        'attractions': [],
+        'selections': []
+      }
+    };
+
 
   $(function() {
-    $( "#datepicker" ).datepicker();
-    url = "assets/data/homepage.json";
-    $http.get(url).then(function(response) {
-      if(response.status = 200) {
-        console.log(response.data);
-      } else {
-        // something went wrong
-      }
-      // vm.hompage = response.data.message.content;
-    }, function(err) {
-      Notification.warning(err);
-    });
   });
   // INIT CONTROLLER
   function init() {
     vm.getTopPicks();
     vm.getMapAttractions();
   };
+
+  function search() {
+    // vm.request = {
+    //   'where_to':
+    //   'type':
+    // };
+
+  }
   // LOAD MAP
   function loadMap() {
     vm.dynMarkers = []

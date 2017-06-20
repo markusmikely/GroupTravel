@@ -32,9 +32,10 @@ function AttractionController($window, $cookies, $http, $stateParams, $rootScope
   vm.processAttraction = processAttraction;
 
   function processAttraction(attraction) {
+    console.log('attraction');
     console.log(attraction);
     var pAttraction = {
-      'id': attraction.id,
+      'id': attraction.nid,
       'title': attraction.title,
       'address': {
         'address1': attraction.field_address_address_line1,
@@ -51,6 +52,10 @@ function AttractionController($window, $cookies, $http, $stateParams, $rootScope
         'days' : vm.getTimeEl('days'),
         'hours' : vm.getTimeEl('hours'),
         'minutes' : vm.getTimeEl('minutes'),
+      },
+      'coordinates':  {
+        'lng': JSON.parse(attraction.field_location).coordinates[0],
+        'lat': JSON.parse(attraction.field_location).coordinates[1],
       },
       'rank': attraction.field_rank
     };
@@ -85,9 +90,12 @@ function AttractionController($window, $cookies, $http, $stateParams, $rootScope
     var id = $stateParams.id;
     //TO DO Init ajax call for data
     var url = "http://localhost/drupal/drupal-8.3.2/web/json/attraction-by-id/?nid="+id;
+
+    console.log(url);
     $http.get(url).then(function(response) {
       vm.loading = false;
       if(response.status = 200) {
+        console.log('response');
         console.log(response);
         vm.attraction = vm.processAttraction(response.data[0]);
         vm.mainImage = vm.attraction.images[0];

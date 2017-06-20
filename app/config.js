@@ -24,7 +24,6 @@ function modalProvider($stateProvider) {
             });
         };
     }
-// config.$inject = ["$routeProvider", '$locationProvider'];
     function config($stateProvider, $urlRouterProvider, modalStateProvider, $sceDelegateProvider) {
          $sceDelegateProvider.resourceUrlWhitelist([
           'self',

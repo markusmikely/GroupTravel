@@ -5,21 +5,16 @@
 				<div class="col-lg-12">
 					<div class="attraction-form form form-inline">
 						<div class="form-group visit">
-							<label>Where to <b>{{vm.homepage.search.where.value.name}}</b></label>
+							<label>Where to <b>{{vm.homepage.search.where.value[0].title}}</b></label>
 							<input type="text" class="form-control"
-								placeholder="{{vm.homepage.search.where.placeholder}}"
-								ng-model="vm.homepage.search.where.value"
-								ng-focus="vm.homepage.search.where.placeholder = 'Search Location or Attractions e.g. London or British Museum'"
-								ng-blur="vm.homepage.search.where.placeholder = 'Anywhere'"
-				        typeahead="user as user.name for user in vm.getTerms($viewValue)"
-				        typeahead-template-url="typeahead-item.html" />
-
-							<script type="text/ng-template" id="typeahead-item.html">
-								<div class="typeahead-group-header" ng-if="match.model.firstInGroup">{{match.model.group}}</div>
-								<a>
-									<span ng-bind-html="match.label | typeaheadHighlight:query"></span>
-								</a>
-							</script>
+								 kendo-autocomplete
+								 k-data-source="customersDataSource"
+								 k-data-text-field="'title'"
+             		 k-data-value-field="'nid'"
+								 k-ng-model="vm.homepage.search.where.value"
+								 k-ng-focus="vm.homepage.search.where.placeholder = 'Search Location or Attractions e.g. London or British Museum'"
+								 k-ng-blur="vm.homepage.search.where.placeholder = 'Anywhere'"
+								 search-box />
 						</div>
 						<div class="form-group when">
 							<label>When <b>{{vm.homepage.search.when.value}}</b></label>
@@ -95,7 +90,6 @@
 					      </div>
 					    </custom-marker>
 					  </ng-map>
-						<!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.5391499026014!2d-0.12173704886296358!3d51.50332397953459!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604b900d26973%3A0x4291f3172409ea92!2sCoca+Cola+London+Eye!5e0!3m2!1sen!2suk!4v1496947306981" width="1200" height="400" frameborder="0" style="border:0" allowfullscreen></iframe> -->
 					</div>
 				</div>
 			</div>

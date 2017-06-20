@@ -1,9 +1,18 @@
+/* Kendo UI Componenets */
+@import url("http://kendo.cdn.telerik.com/2016.1.226/styles/kendo.common.min.css");
+@import url("http://kendo.cdn.telerik.com/2016.1.226/styles/kendo.rtl.min.css");
+@import url("http://kendo.cdn.telerik.com/2016.1.226/styles/kendo.default.min.css");
+@import url("http://kendo.cdn.telerik.com/2016.1.226/styles/kendo.mobile.all.min.css");
+
 @import url("https://fonts.googleapis.com/css?family=Roboto+Condensed");
 @import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
 @import url("../../node_modules/bootstrap/dist/css/bootstrap.min.css");
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 @import url('datetimepicker.css');
 @import url('custom-marker.css');
+@import url('auto-complete.css');
+@import url('single-attraction.css');
+@import url('search.css');
 
 
 
@@ -664,7 +673,10 @@ a.selection-link:hover i {
 }
 
 .attraction-form .visit input {
-    width: 400px;
+  width: 400px !important;
+  height: 45px !important;
+  padding: 0 15px !important;
+  margin: 0 !important;
 }
 .attraction-form .search button {
   padding: 10px 40px;
@@ -1062,12 +1074,23 @@ ul.form button {
     color: white;
 }
 .form .form-control {
-    min-height:45px;
-    border-radius: 0;
-    border:none;
-    width: 100%;
-    border-radius:3px;
-    border: 1px solid #eee;
+  min-height: 45px;
+  border-radius: 0;
+  border: none;
+  width: 100%;
+  border-radius: 3px;
+  border: 1px solid #eee;
+  vertical-align: top;
+  display: initial;
+}
+span.form-control {
+    border: none !important;
+    min-height: initial !important;
+    width: initial !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    vertical-align: top;
+    display: initial;
 }
 .form button.btn.btn-primary {
     min-height: 45px;
