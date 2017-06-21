@@ -249,7 +249,7 @@ ul.pagination li a span {
     background: #228b96;
     color: white;
 }
-ng-map {
+.search-page ng-map {
     position: ABSOLUTE;
     top: 0;
     left: 0;

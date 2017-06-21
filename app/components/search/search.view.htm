@@ -1,4 +1,4 @@
-<section id="content" ng-controller="SearchController as vm">
+<section id="content" class="search-page" ng-controller="SearchController as vm">
     <div id="map-view">
         <div>
             <ng-map default-style="true" zoom="2">
@@ -14,12 +14,12 @@
                     strokeWeight: 2
                   }"
                 </marker>
-                <info-window id="foo-iw" style="background:red;" ng-click="count = count + 1" ng-init="count=0">
-                    <div ng-non-bindable="" class="iw"
+                <info-window id="foo-iw">
+                    <div class="iw"
                       ng-mouseover="vm.focusOnResult(vm.attraction)"
                       ng-mouseout="vm.cancelFocus(vm.attraction)">
-                      <b >{{vm.attraction.title}}</b>
-                      <span>{{vm.attraction.location.city}}, {{vm.attraction.location.postcode}}</span>
+                      <b ng-bind="vm.attraction.title"></b>
+                      <span ng-bind="vm.attraction.address.county"></span>, <span ng-bind="vm.attraction.address.postcode"></spans>
                       <a href="{{vm.attraction.id}}"><i class="glyphicon glyphicon-eye-open"></i></a>
                     </div>
                 </info-window>
@@ -30,27 +30,33 @@
 	    <div id="results-filter">
 			    <div class="attraction-form form form-inline">
 				      <ul class="list-inline">
-    					    <li class="col-lg-3"><a href="#">Location: London <i class="glyphicon glyphicon-menu-down"></i></a></li>
-    					    <li class="col-lg-3"><a href="#">When:Anything <i class="glyphicon glyphicon-menu-down"></i></a></li>
-    					    <li class="col-lg-3"><a href="#">Experiences: {{vm.countSelected}} selected <i class="glyphicon glyphicon-menu-down"></i></a></li>
-    					    <li class="col-lg-3"><a class="highlight" href="#">Our Packages <i class="glyphicon glyphicon-menu-down"></i></a></li>
+    					    <li class="col-lg-3"><a ng-click="vm.showFilter('location')">Location: London <i class="glyphicon glyphicon-menu-down"></i></a></li>
+    					    <li class="col-lg-3"><a ng-click="vm.showFilter('when')">When:Anything <i class="glyphicon glyphicon-menu-down"></i></a></li>
+    					    <li class="col-lg-3"><a ng-click="vm.showFilter('tags')">Experiences: {{vm.countSelected}} selected <i class="glyphicon glyphicon-menu-down"></i></a></li>
+    					    <li class="col-lg-3"><a  ng-click="vm.showFilter('packages')" class="highlight" href="#">Our Packages <i class="glyphicon glyphicon-menu-down"></i></a></li>
       				</ul>
+              <div id="filter-content" class="row animate-show" ng-show="filter" ng-init="filter = false">
+                  <div class="location-filter" ng-show="vm.filter.location">Location</div>
+                  <div class="when-filter" ng-show="vm.filter.when">When</div>
+                  <div class="tags-filter" ng-show="vm.filter.tags">Tags</div>
+                  <div class="package-filter" ng-show="vm.filter.package">Packages</div>
+              </div>
           </div>
 		  </div>
 	    <div id="results-view">
         <div class="col-lg-4" ng-repeat="item in vm.items">
-          <div ng-mouseover="vm.showDetail($event, item)" ng-class="{'focus':item.focus}" ng-class="{'featured':item.featured}"  id="attraction-{{item.id}}" class="attraction">
-            <div id="attraction-carousel-{{item.nid}}" class="carousel slide" data-ride="carousel">
+          <div ng-mouseover="vm.showDetail($event, $index)" ng-class="{'focus':item.focus}" ng-class="{'featured':item.featured}"  id="attraction-{{item.id}}" class="attraction">
+            <div id="attraction-carousel-{{item.id}}" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner" role="listbox">
-                <div ng-repeat="image in item.thumbnails" ng-class="{'active':$index == 0}" class="item">
+                <div ng-repeat="image in item.images" ng-class="{'active':$index == 0}" class="item">
                   <img ng-src="{{image}}" />
                 </div>
               </div>
               <!-- Controls -->
-              <span class="left carousel-control" data-target="#attraction-carousel-{{item.nid}}" data-slide="prev">
+              <span class="left carousel-control" data-target="#attraction-carousel-{{item.id}}" data-slide="prev">
                 <span class="glyphicon glyphicon-chevron-left"></span>
               </span>
-              <span class="right carousel-control" data-target="#attraction-carousel-{{item.nid}}" data-slide="next">
+              <span class="right carousel-control" data-target="#attraction-carousel-{{item.id}}" data-slide="next">
                 <span class="glyphicon glyphicon-chevron-right"></span>
               </span>
             </div>

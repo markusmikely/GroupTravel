@@ -5,6 +5,8 @@ var app= angular.module("twinApp", ['ngCookies', 'ui.router', 'ngMap', 'ngAnimat
 	.config(config)
 	.factory('PagerService', PagerService)
 	.service("CartService", CartService)
+	.service("AttractionService", AttractionService)
+	.service("MapService", MapService)
 	.controller('HomeController', HomeController)
 	.controller('AttractionController', AttractionController)
 	.controller('SearchController', SearchController)
@@ -35,6 +37,21 @@ var app= angular.module("twinApp", ['ngCookies', 'ui.router', 'ngMap', 'ngAnimat
             win.bind('scroll', affixElement);
         }
     };
+})
+.directive('dynPlaceholder', function()
+{
+    return {
+        restrict: 'E',
+        link: function(scope, element, attrs)
+        {
+            element.bind('focus', function(){
+							attrs.$set('placeholder', 'Test');
+						});
+						element.bind('blur', function(){
+							attrs.$set('placeholder', 'Test2');
+						});
+        }
+    }
 })
 .filter('unsafe', function($sce) {
     return function(val) {
