@@ -26,6 +26,12 @@ function HomeController($cookies, $scope, $http, $state, $rootScope, filterFilte
           };
 
   var vm = this;
+
+  vm.updateProgress = function() {
+    $rootScope.duration = vm.duration;
+    CartService.SumDays();
+    console.log($rootScope.tripProgress);
+  }
   // ATTRIBUTES
   vm.loading = true;
   vm.homepage = {

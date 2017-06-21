@@ -21,11 +21,7 @@ function AttractionService($cookies, $rootScope, $http) {
           'body': attraction.body,
           'experiences': attraction.field_experiences.split(","),
           'images': attraction.field_feature.split(","),
-          'time_required': {
-            'days' : this.GetTimeEl('days'),
-            'hours' : this.GetTimeEl('hours'),
-            'minutes' : this.GetTimeEl('minutes'),
-          },
+          'time_required':attraction.field_time_required,
           'rank': attraction.field_rank,
           'focus': false,
           'featured':false
@@ -57,17 +53,6 @@ function AttractionService($cookies, $rootScope, $http) {
           'lat': JSON.parse(attraction.field_location).coordinates[1],
         }
       };
-    },
-    GetTimeEl: function(time, gran) {
-      var timeArray = time.split(",");
-
-      for (var i = 0; i < timeArray.length; i++) {
-        if(timeArray[i].indexOf(gran) != -1) {
-          time = timeArray[i].replace(" "+gran, "");
-          return time;
-        }
-      }
-      return "";
     },
     GetAttraction: function(id) {
       //TO DO Init ajax call for data

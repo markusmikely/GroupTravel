@@ -24,7 +24,8 @@ function modalProvider($stateProvider) {
             });
         };
     }
-    function config($stateProvider, $urlRouterProvider, modalStateProvider, $sceDelegateProvider) {
+    function config($cookiesProvider, $stateProvider, $urlRouterProvider, modalStateProvider, $sceDelegateProvider) {
+         $cookiesProvider.defaults.path = '/';
          $sceDelegateProvider.resourceUrlWhitelist([
           'self',
           'http://www.youtube.com/**',

@@ -1,5 +1,5 @@
-CartService.$inject = ['$cookies', '$rootScope'];
-function CartService($cookies, $rootScope) {
+CartService.$inject = ['$cookies', '$rootScope', '$log'];
+function CartService($cookies, $rootScope, $log) {
   // - Create Selection object
   // - Add dummy data to selection
   // - Add function
@@ -8,13 +8,26 @@ function CartService($cookies, $rootScope) {
   // - Sum-days
   // - empty selection
   return {
+    Init: function() {
+      $rootScope.api = "http://localhost/drupal/drupal-8.3.2/web/";
+    	$rootScope.cart = [];
+    	$rootScope.days = 0;
 
+    	var cart = $cookies.get('twinuk_user_selections');
+    	if(cart != undefined) {
+    		$rootScope.cart = JSON.parse(cart);
+    	}
+      this.SumDays();
+    },
     Empty: function() {
       this.Save();
     },
     AddAttraction: function(attraction) {
       if($rootScope.cart.indexOf(attraction) == -1) {
         $rootScope.cart.push(attraction);
+        var cartString = JSON.stringify($rootScope.cart);
+        $cookies.put('twinuk_user_selections', cartString);
+
         this.Save();
       } else {
         // Attraction already in selection
@@ -23,6 +36,9 @@ function CartService($cookies, $rootScope) {
     },
     RemoveAttraction($index) {
       $rootScope.cart.splice($index, 1);
+      var cartString = JSON.stringify($rootScope.cart);
+      $cookies.put('twinuk_user_selections', cartString);
+
       this.Save();
     },
     Total: function() {
@@ -30,10 +46,24 @@ function CartService($cookies, $rootScope) {
     },
     SumDays: function() {
 
+      $rootScope.days = 0;
+      for (var i = 0; i < $rootScope.cart.length; i++) {
+        $rootScope.days = $rootScope.days + parseFloat($rootScope.cart[i].time_required);
+      }
+
+      $rootScope.tripProgress = ($rootScope.days/$rootScope.duration) * 100;
+      console.log('TripProgress', $rootScope.tripProgress);
+      console.log('Days', $rootScope.days);
+      console.log('Duration',$rootScope.duration);
     },
     Save: function() {
       var cartString = JSON.stringify($rootScope.cart);
       $cookies.put('twinuk_user_selections', cartString);
+      $log.info($cookies);
+      $cookies.put('keyHere', 'valueHere'); // set
+      $cookies.get('keyHere'); // get
+      $cookies.putObject('key2Here', {val: "etc"}); // set
+      $cookies.getObject('key2Here'); // get
     }
     // EmptyCart: function() {
     //   $rootScope.cart = {};

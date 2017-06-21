@@ -73,7 +73,7 @@ function SearchController($http, $state, $rootScope, PagerService, MapService, A
     // console.log(attraction);
     // console.log(attraction.id);
     // $scope.$apply();
-    vm.map.showInfoWindow('foo-iw', vm.attraction.id).$apply();
+    vm.map.showInfoWindow('foo-iw', vm.attraction.id);
 
   };
   function hideDetail() {

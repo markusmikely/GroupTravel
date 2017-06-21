@@ -10,11 +10,11 @@
             <li class="days-needed">Attractions selected</li>
             <li><span>{{cart.length}}</span></li>
             <li class="days-needed">Days needed</li>
-            <li><span>3</span></li>
+            <li><span>{{days}}</span></li>
             <li>
               <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="{{width}}" aria-valuemin="0" aria-valuemax="100" style="width: {{width}}%;">
-                  <span class="sr-only">{{width}}% Complete</span>
+                <div class="progress-bar" role="progressbar" aria-valuenow="{{tripProgress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{tripProgress}}%;">
+                  <span class="sr-only">{{tripProgress}}% Complete</span>
                 </div>
               </div>
             </li>
@@ -31,7 +31,7 @@
         <ul class="list-inline">
           <li ng-repeat="attraction in cart">
             <a ng-click="vm.removeAttraction($index)"><i class="glyphicon glyphicon-remove"></i></a>
-            <img ng-src="{{attraction.thumbnails[0]}}" />
+            <img ng-src="{{attraction.images[0]}}" />
             <h6>{{attraction.Title}}</h6>
             <div class="clearfix"></div>
           </li>
