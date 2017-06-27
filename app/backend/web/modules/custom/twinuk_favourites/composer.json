@@ -1,0 +1,14 @@
+{
+  "name": "drupal/twinuk_favourites",
+  "type": "drupal-module",
+  "description": "This module handles the users' storage of attractions",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/twinuk_favourites",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/twinuk_favourites",
+    "source": "http://cgit.drupalcode.org/twinuk_favourites"
+  },
+  "require": { }
+}

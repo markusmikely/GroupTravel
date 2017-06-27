@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains twinuk_ranking.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function twinuk_ranking_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the twinuk_ranking module.
+    case 'help.page.twinuk_ranking':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('A module that manages the rcalculations and storage of the ranking algorithmn') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function twinuk_ranking_theme() {
+  return [
+    'twinuk_ranking' => [
+      'render element' => 'children',
+    ],
+  ];
+}

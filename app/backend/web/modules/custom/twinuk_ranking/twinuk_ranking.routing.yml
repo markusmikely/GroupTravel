@@ -1,0 +1,8 @@
+
+twinuk_ranking.rank_controller_attractions:
+  path: '/twinuk_ranking/attractions/{experiences}/{previous_experiences}'
+  defaults:
+    _controller: '\Drupal\twinuk_ranking\Controller\RankController::attractions'
+    _title: 'Rank'
+  requirements:
+    _permission: 'access content'

@@ -1,0 +1,14 @@
+{
+  "name": "drupal/twinuk_ranking",
+  "type": "drupal-module",
+  "description": "A module that manages the rcalculations and storage of the ranking algorithmn",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/twinuk_ranking",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/twinuk_ranking",
+    "source": "http://cgit.drupalcode.org/twinuk_ranking"
+  },
+  "require": { }
+}

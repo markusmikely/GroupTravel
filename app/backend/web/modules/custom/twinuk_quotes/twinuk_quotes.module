@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains twinuk_quotes.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function twinuk_quotes_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the twinuk_quotes module.
+    case 'help.page.twinuk_quotes':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This Module handles the creation and management of quote requests') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function twinuk_quotes_theme() {
+  return [
+    'twinuk_quotes' => [
+      'render element' => 'children',
+    ],
+  ];
+}

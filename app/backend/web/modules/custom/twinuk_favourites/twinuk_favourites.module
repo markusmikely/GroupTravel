@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains twinuk_favourites.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function twinuk_favourites_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the twinuk_favourites module.
+    case 'help.page.twinuk_favourites':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This module handles the users&#039; storage of attractions') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function twinuk_favourites_theme() {
+  return [
+    'twinuk_favourites' => [
+      'render element' => 'children',
+    ],
+  ];
+}

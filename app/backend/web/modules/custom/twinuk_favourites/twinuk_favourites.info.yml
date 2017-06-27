@@ -1,0 +1,5 @@
+name: TwinUK Favourites
+type: module
+description: This module handles the users' storage of attractions
+core: 8.x
+package: Custom

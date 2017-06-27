@@ -30,16 +30,45 @@
 	    <div id="results-filter">
 			    <div class="attraction-form form form-inline">
 				      <ul class="list-inline">
-    					    <li class="col-lg-3"><a ng-click="vm.showFilter('location')">Location: London <i class="glyphicon glyphicon-menu-down"></i></a></li>
-    					    <li class="col-lg-3"><a ng-click="vm.showFilter('when')">When:Anything <i class="glyphicon glyphicon-menu-down"></i></a></li>
-    					    <li class="col-lg-3"><a ng-click="vm.showFilter('tags')">Experiences: {{vm.countSelected}} selected <i class="glyphicon glyphicon-menu-down"></i></a></li>
-    					    <li class="col-lg-3"><a  ng-click="vm.showFilter('packages')" class="highlight" href="#">Our Packages <i class="glyphicon glyphicon-menu-down"></i></a></li>
+    					    <li class="col-lg-3" ng-class="{'open' : vm.filter.location.visible}"><a ng-click="vm.toggleFilter('location')">Location: {{vm.filter.location.value}} <i class="glyphicon glyphicon-menu-down"></i></a></li>
+    					    <li class="col-lg-3" ng-class="{'open' : vm.filter.when.visible}"><a ng-click="vm.toggleFilter('when')">When:{{vm.filter.when.value}} <i class="glyphicon glyphicon-menu-down"></i></a></li>
+    					    <li class="col-lg-3" ng-class="{'open' : vm.filter.tags.visible}"><a ng-click="vm.toggleFilter('tags')">Experiences: {{vm.filter.tags.selected.length}} selected <i class="glyphicon glyphicon-menu-down"></i></a></li>
+    					    <li class="col-lg-3" ng-class="{'open' : vm.filter.package.visible}"><a ng-click="vm.toggleFilter('package')" class="highlight">Our Packages <i class="glyphicon glyphicon-menu-down"></i></a></li>
       				</ul>
-              <div id="filter-content" class="row animate-show" ng-show="filter" ng-init="filter = false">
-                  <div class="location-filter" ng-show="vm.filter.location">Location</div>
-                  <div class="when-filter" ng-show="vm.filter.when">When</div>
-                  <div class="tags-filter" ng-show="vm.filter.tags">Tags</div>
-                  <div class="package-filter" ng-show="vm.filter.package">Packages</div>
+              <div id="filter-content">
+                  <div class="location-filter" class="animate-show" ng-show="vm.filter.location.visible">
+                    <input type="text" class="form-control"
+      								 kendo-autocomplete
+      								 k-data-source="customersDataSource"
+      								 k-data-text-field="'title'"
+                   		 k-data-value-field="'nid'"
+      								 k-ng-model="vm.filter.location.value"
+      								 ng-attr-placeholder="{{vm.filter.location.placeholder}}"
+                       ng-model="vm.filter.location.value"
+      								 dynPlaceholder />
+                  </div>
+                  <div class="when-filter" class="animate-show" ng-show="vm.filter.when.visible">
+                    <input kendo-date-picker
+        							placeholder="{{vm.homepage.search.when.placeholder}}"
+        							 type="text"
+        							 class="form-control"
+         								ng-model="vm.filter.when.value"
+        							 k-ng-model="dateObject"
+        							 style="width: 100%;" />
+
+                  </div>
+                  <div class="tags-filter" class="animate-show" ng-show="vm.filter.tags.visible">
+                    <ul class="list-inline">
+                      <li ng-repeat="exp in vm.experiences"><a ng-class="{'selected': exp.selected}" ng-click="vm.toggleExp(exp)">{{exp.name}}</a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="package-filter" class="animate-show" ng-show="vm.filter.package.visible">
+                    <ul class="list-inline">
+                      <li ng-repeat="exp in vm.experiences"><a ng-class="{'selected': exp.selected}" ng-click="vm.toggleExp(exp)">{{exp.name}}</a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
               </div>
           </div>
 		  </div>

@@ -46,15 +46,15 @@ function CartService($cookies, $rootScope, $log) {
     },
     SumDays: function() {
 
-      $rootScope.days = 0;
-      for (var i = 0; i < $rootScope.cart.length; i++) {
-        $rootScope.days = $rootScope.days + parseFloat($rootScope.cart[i].time_required);
-      }
-
-      $rootScope.tripProgress = ($rootScope.days/$rootScope.duration) * 100;
-      console.log('TripProgress', $rootScope.tripProgress);
-      console.log('Days', $rootScope.days);
-      console.log('Duration',$rootScope.duration);
+      // $rootScope.days = 0;
+      // for (var i = 0; i < $rootScope.cart.length; i++) {
+      //   $rootScope.days = $rootScope.days + parseFloat($rootScope.cart[i].time_required);
+      // }
+      //
+      // $rootScope.tripProgress = ($rootScope.days/$rootScope.duration) * 100;
+      // console.log('TripProgress', $rootScope.tripProgress);
+      // console.log('Days', $rootScope.days);
+      // console.log('Duration',$rootScope.duration);
     },
     Save: function() {
       var cartString = JSON.stringify($rootScope.cart);

@@ -1,0 +1,14 @@
+{
+  "name": "drupal/twinuk_quotes",
+  "type": "drupal-module",
+  "description": "This Module handles the creation and management of quote requests",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/twinuk_quotes",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/twinuk_quotes",
+    "source": "http://cgit.drupalcode.org/twinuk_quotes"
+  },
+  "require": { }
+}

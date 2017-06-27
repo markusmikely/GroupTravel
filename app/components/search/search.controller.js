@@ -1,5 +1,29 @@
 SearchController.$inject = ['$http', '$state', '$rootScope', 'PagerService', 'MapService', 'AttractionService', '$scope', 'NgMap', '$compile'];
 function SearchController($http, $state, $rootScope, PagerService, MapService, AttractionService, $scope, NgMap, $compile) {
+  $scope.placeholder = "foo";
+  $scope.monthSelectorOptions = {
+              start: "year",
+              depth: "year"
+            };
+            $scope.getType = function(x) {
+              return typeof x;
+            };
+            $scope.isDate = function(x) {
+              return x instanceof Date;
+            };
+
+            $scope.customersDataSource = {
+            transport: {
+              serverFiltering: true,
+              read: {
+                dataType: "json",
+                url: "/drupal/drupal-8.3.2/web/json/search-autocomplete"
+              }
+            },
+            group: { field: "type" } //group the data by 'Country' field
+
+          };
+
 
   var vm = this;
   window.vm = this;
@@ -7,16 +31,19 @@ function SearchController($http, $state, $rootScope, PagerService, MapService, A
   vm.loading = false;
   vm.results = []; // dummy array of items to be paged
   vm.pager = {};
-  vm.countSelected = 0;
   vm.filter = {
     'location' : {
-        'visible':false
+        'visible':false,
+        'placeholder': 'Anywhere',
+        'value': 'Anywhere'
     },
     'when': {
-        'visible':false
+        'visible':false,
+        'value': 'Anytime'
     },
     'tags': {
-        'visible':false
+        'visible':false,
+        'selected': []
     },
     'package' : {
         'visible':false
@@ -31,12 +58,43 @@ function SearchController($http, $state, $rootScope, PagerService, MapService, A
   vm.cancelFocus = cancelFocus;
   vm.showDetail = showDetail;
   vm.hideDetail = hideDetail;
-  vm.showFilter = showFilter;
+  vm.toggleFilter = toggleFilter;
+
   // Init
   (function initController() {
     vm.init();
   })();
 
+  function toggleFilter(filter) {
+    console.log(filter);
+    switch (filter) {
+      case 'location':
+        vm.filter.location.visible = !vm.filter.location.visible ;
+        vm.filter.when.visible = false;
+        vm.filter.tags.visible = false;
+        vm.filter.package.visible = false;
+        break;
+      case 'when':
+        vm.filter.when.visible = !vm.filter.when.visible;
+        vm.filter.location.visible = false;
+        vm.filter.tags.visible = false;
+        vm.filter.package.visible = false;
+        break;
+      case 'tags':
+        vm.filter.tags.visible = !vm.filter.tags.visible;
+        vm.filter.when.visible = false;
+        vm.filter.location.visible = false;
+        vm.filter.package.visible = false;
+        break;
+      case 'package':
+        vm.filter.package.visible = !vm.filter.package.visible;
+        vm.filter.when.visible = false;
+        vm.filter.tags.visible = false;
+        vm.filter.location.visible = false;
+        break;
+      default:
+    }
+  };
   function init() {
     vm.loadExperiences();
     vm.search();
@@ -110,6 +168,16 @@ function SearchController($http, $state, $rootScope, PagerService, MapService, A
     // google.maps.event.trigger(vm.map,'resize');
 
   };
+  vm.toggleExp = toggleExp;
+  function toggleExp(exp) {
+    console.log(exp);
+    exp.selected = !exp.selected;
+    if(vm.filter.tags.selected.indexOf(exp) == -1) {
+      vm.filter.tags.selected.push(exp);
+    } else {
+      vm.filter.tags.selected.splice(vm.filter.tags.selected.indexOf(exp), 1);
+    }
+  };
   function loadExperiences() {
       var url = $rootScope.api+ 'json/experience-tags';
 
@@ -121,6 +189,7 @@ function SearchController($http, $state, $rootScope, PagerService, MapService, A
           for (var i = 0; i < vm.experiences.length; i++) {
             vm.experiences[i].selected = false;
           }
+          console.log(vm.experiences);
         }
       });
   };

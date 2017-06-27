@@ -36,7 +36,7 @@
   padding:0 10px;*/
   height:0;
 }
-.show-selection i {
+.show-selection i, .open i {
   -moz-transform: scaleY(-1);
   -o-transform: scaleY(-1);
   -webkit-transform: scaleY(-1);
@@ -623,7 +623,7 @@ i.glyphicon.glyphicon-triangle-bottom {
 #quote-management > a:hover,#quote-management > a:hover i {
     color: #121212;
 }
-#quote-management > a i,#quote-management > a {
+#quote-management > a i,#quote-management > a, .glyphicon {
     transition: all linear .3s;
     -webkit-transition: all linear .3s;
 }
@@ -799,7 +799,36 @@ a.team-member {
     box-shadow: 1px 1px 1px rgba(0,0,0,0.2);
 }
 
+/* Filtering */
+#filter-content ul.list-inline {
+    height: initial;
+    padding: 10px 0;
+}
 
+#filter-content ul.list-inline li {
+    width: 20%;
+    border: none !important;
+    padding: 5px 10px;
+    display: flex;
+    float: left;
+    flex-direction: column;
+    align-items: center;
+}
+#filter-content ul.list-inline li a {
+    border: none;
+    display: initial;
+    padding: 0px 10px;
+    background: #ffffff;
+    color: #121212;
+    border-radius: 15px;
+    font-weight: 400;
+    line-height: 2.5;
+    height: initial;
+}
+#filter-content ul.list-inline li a.selected {
+    background: #228b96;
+    color: white;
+}
 
 a.team-member div.info h4, a.team-member div.info h5 {
     margin: 0 0 5px 0;
@@ -2790,8 +2819,46 @@ button.btn.btn-primary.btn-block {
          right:0
      }
     header {
-        position: relative;
+      padding: 15px 25px;
+      height: 80px;
     }
+    div#main-menu {
+      border:none;
+    }
+    div#logo {
+      margin: 0px;
+      height: 50px;
+      display: block;
+      flex-direction: initial;
+      align-items: initial;
+      justify-content: initial;
+    }
+    div#logo a {
+        display: block;
+        height: 50px;
+    }
+    #logo img {
+        padding: 0;
+        margin: 0;
+        height: 50px;
+        width: auto;
+    }
+    header h1 {
+        color: #771177;
+        float: left;
+        margin: 32px 0 0 7px;
+        font-family: Lato;
+        font-weight: 100;
+        font-size: 15px;
+        line-height: .8;
+        letter-spacing: 0;
+        text-align: center;
+        /* width: 50px; */
+        text-transform: initial;
+        line-height: 1.2;
+        text-align: left;
+    }
+
     a.team-member, .image-bg a.btn.btn-primary {
         margin-bottom: 20px !important;
     }
@@ -2800,27 +2867,28 @@ button.btn.btn-primary.btn-block {
     }
 
 
-    div#logo {
+    /*div#logo {
         margin: 20px auto;
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-    }
+    }*/
 
     div#main-menu ul {
         display: none;
     }
 
     button#showMenu {
-        position: absolute;
-        top: 40px;
-        width: 30px;
-        height: 30px;
-        background: transparent;
-        padding: 0;
-        left: 20px;
+      position: absolute;
+      top: 0;
+      width: 50px;
+      height: 44px;
+      background: url(../images/Menu.svg);
+      padding: 0;
+      right: 0;
+      background-repeat: no-repeat;
     }
 
     button#showMenu span {

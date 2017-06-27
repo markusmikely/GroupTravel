@@ -1,0 +1,5 @@
+name: TwinUK Ranking
+type: module
+description: A module that manages the rcalculations and storage of the ranking algorithmn
+core: 8.x
+package: Custom
