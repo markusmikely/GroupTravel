@@ -7,14 +7,17 @@ function AttractionService($cookies, $rootScope, $http, ApiService) {
   // gettoppicks
   // getMapAttractionsma
     ProcessEntity: function(attraction) {
-      console.log(attraction);
+      console.log('attraction', attraction);
+      console.log('address', attraction.field_address.length);
+      // console.log('line1', attraction.field_address[0].address_line1);
+
       if(attraction != undefined) {
         var pAttraction = {
           'id': attraction.nid[0].value,
           'title': attraction.title[0].value,
           'address': {
-            'address1': attraction.field_address[0].address_line1,
-            'address2': attraction.field_address[0].address_line2,
+            'address1': (attraction.field_address.length > 0) ? attraction.field_address[0].address_line1 : '',
+            'address2': (attraction.field_address.length > 0) ? attraction.field_address[0].address_line2 : '',
             'county': attraction.field_address[0].locality,
             'postcode': attraction.field_address[0].postal_code,
           },
@@ -50,7 +53,7 @@ function AttractionService($cookies, $rootScope, $http, ApiService) {
           'id': attraction.nid,
           'title': attraction.title,
           'address': {
-            'address1': attraction.field_address_address_line1,
+            'address1': (attraction.field_address_address_line1 != undefined) ? attraction.field_address_address_line1 : "",
             'address2': attraction.field_address_address_line2,
             'county': attraction.field_address_locality,
             'country': attraction.field_address_country_code,

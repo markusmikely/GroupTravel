@@ -1,5 +1,6 @@
-SearchController.$inject = ['$http', '$state', '$rootScope', 'PagerService', 'MapService', 'AttractionService', '$scope', 'NgMap', '$compile'];
-function SearchController($http, $state, $rootScope, PagerService, MapService, AttractionService, $scope, NgMap, $compile) {
+SearchController.$inject = ['$http', '$state', '$rootScope', 'PagerService', 'MapService', 'AttractionService', '$scope', 'NgMap', '$compile', 'SearchService', 'ApiService', 'RankingService'];
+function SearchController($http, $state, $rootScope, PagerService, MapService, AttractionService, $scope, NgMap, $compile, SearchService, ApiService, RankingService) {
+
   $scope.placeholder = "foo";
   $scope.monthSelectorOptions = {
               start: "year",
@@ -194,30 +195,43 @@ function SearchController($http, $state, $rootScope, PagerService, MapService, A
       });
   };
   function search() {
-    var url = $rootScope.api+'json/search';
+    var url = 'http://localhost/grouptravel/app/backend/web/v1/api/search';
 
-    $http.get(url).then(function(response) {
+    ApiService.Get(url).then(function(response) {
       vm.loading = false;
-      if(response.status = 200) {
-        vm.results = []; //response.data;
-        for(var i = 0; i < response.data.length; i++) {
-          var attraction = AttractionService.Process(response.data[i]);
-          vm.results.push(attraction);
+      if(response.status == 200) {
+          var results = response.data;
+          console.log('results', results)
+;          vm.results = []; //response.data;
+          for (var i = 0; i < results.length; i++) {
+            //processAttraction
+            var attraction = AttractionService.ProcessEntity(results[i]);
+            var request = {
+              'experiences' : [],
+              'previous_experiences' : []
+            };
+
+            var rank = RankingService.Init(request, attraction);
+
+            attraction.rank.previous = rank.previous;
+            attraction.rank.current = rank.current;
+
+            vm.results.push(attraction);
+          }
+          vm.setPage(1);
+
+          MapService.LoadSearchMap(vm.map).then(function(map) {
+            var bounds = new google.maps.LatLngBounds();
+            for (var k in map.markers) {
+              var cm = map.markers[k];
+              bounds.extend(cm.getPosition());
+            };
+            map.setCenter(bounds.getCenter());
+            map.fitBounds(bounds);
+
+            vm.map = map;
+          });
         }
-        vm.setPage(1);
-
-        MapService.LoadSearchMap(vm.map).then(function(map) {
-          var bounds = new google.maps.LatLngBounds();
-          for (var k in map.markers) {
-            var cm = map.markers[k];
-            bounds.extend(cm.getPosition());
-          };
-          map.setCenter(bounds.getCenter());
-          map.fitBounds(bounds);
-
-          vm.map = map;
-        });
-      }
     });
   }
 };

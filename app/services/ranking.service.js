@@ -2,11 +2,7 @@ RankingService.$inject = [];
 function RankingService() {
   return {
     Init: function(request, attraction) {
-      Array.prototype.intersection = function(arr) {
-        return this.filter(function(e) {
-          return arr.indexOf(e) > -1;
-        });
-      };
+    
       this.request = request;
       this.attraction = attraction;
       this.response = {};
@@ -57,9 +53,12 @@ function RankingService() {
       }
       return diff;
     },
-    array_intersect: function(array1, array2) {
-      var intersection = array1.intersection(array2);
-      return intersection;
+    array_intersect: function(a, arrbay2) {
+      var t;
+      if (b.length > a.length) t = b, b = a, a = t; // indexOf to loop over shorter
+      return a.filter(function (e) {
+          return b.indexOf(e) > -1;
+      });
     },
     calculateAge: function(date) {
       var ageDifMs = Date.now() - date.getTime();

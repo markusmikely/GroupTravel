@@ -1,4 +1,4 @@
-var app= angular.module("twinApp", ['ngCookies', 'ui.router', 'ngMap', 'ngAnimate', 'kendo.directives', 'ngAffix'])
+var app= angular.module("twinApp", ['ngCookies', 'ui.router', 'ngMap', 'ngAnimate', "kendo.directives", 'ngAffix'])
 	.provider('modalState', modalProvider)
   .run(run)
 	.config(config)

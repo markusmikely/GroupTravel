@@ -3,34 +3,41 @@ function HomeController($cookies, $scope, $http, $state, $rootScope, filterFilte
 
   $scope.placeholder = "foo";
   $scope.monthSelectorOptions = {
-              start: "year",
-              depth: "year"
-            };
-            $scope.getType = function(x) {
-              return typeof x;
-            };
-            $scope.isDate = function(x) {
-              return x instanceof Date;
-            };
-
-            $scope.customersDataSource = {
-            transport: {
-              serverFiltering: true,
-              read: {
-                dataType: "json",
-                url: "/drupal/drupal-8.3.2/web/json/search-autocomplete"
-              }
-            },
-            group: { field: "type" } //group the data by 'Country' field
-
-          };
+    start: "year",
+    depth: "year"
+  };
+  $scope.getType = function(x) {
+    return typeof x;
+  };
+  $scope.isDate = function(x) {
+    return x instanceof Date;
+  };
+  $scope.customersDataSource = {
+    transport: {
+      serverFiltering: true,
+      read: {
+        dataType: "json",
+        url: "/drupal/drupal-8.3.2/web/json/search-autocomplete"
+      }
+    },
+    group: { field: "type" } //group the data by 'Country' field
+  };
 
   var vm = this;
 
+  vm.autocomplete = {
+    transport: {
+      serverFiltering: true,
+      read: {
+        dataType: "json",
+        url: "http://localhost/drupal/drupal-8.3.2/web/json/search-autocomplete"
+      }
+    },
+    group: { field: "type" } //group the data by 'Country' field
+  };
   vm.updateProgress = function() {
     $rootScope.duration = vm.duration;
     CartService.SumDays();
-    console.log($rootScope.tripProgress);
   }
   // ATTRIBUTES
   vm.loading = true;
@@ -70,6 +77,17 @@ function HomeController($cookies, $scope, $http, $state, $rootScope, filterFilte
     vm.getMapAttractions();
   };
   function search() {
+    if(vm.homepage.search.where.value.length > 0) {
+      if(vm.homepage.search.where.value[0].type == 'Attraction') {
+        // Navigate to attraction page
+        $state.transitionTo('attraction', {id:vm.homepage.search.where.value[0].nid});
+      } else if(vm.homepage.search.where.value[0].type == 'Location') {
+        // Perform an attraction search
+        $state.transitionTo('search', {id:vm.homepage.search.where.value[0].nid});
+      }
+    } else {
+      $state.transitionTo('search', {term:vm.homepage.search.where.value});
+    }
   }
   // LOAD MAP
   function loadMap() {

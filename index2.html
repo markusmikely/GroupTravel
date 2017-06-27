@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Twin UK Group Travel</title>
+  	<!-- Base Url -->
+  	<script>
+  		document.write('<base href="' + document.location + '" />');
+  	</script>
+  	<!-- Meta Data -->
+  	<meta charset="utf-8">
+  	<meta content="IE=edge" http-equiv="X-UA-Compatible">
+  	<meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no">
+  	<meta content="Bootstrap, a sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development." name="description">
+  	<meta content="Mark Otto, Jacob Thornton, and Bootstrap contributors" name="author">
+  	<link data-require="bootstrap-css@*" data-semver="3.2.0" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+  	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  	<!-- jQuery and Libraries -->
+  	<script
+  	  src="https://code.jquery.com/jquery-1.12.4.min.js"
+  	  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  	  crossorigin="anonymous"></script>
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  	<script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  	<script type="text/javascript" src="node_modules/moment/moment.js"></script>
+  	<!--  Angular and Libraries -->
+  	<script src="https://code.angularjs.org/1.5.9/angular.js"></script>
+  	<!-- Kendo Ui Componenets -->
+  	<script src="http://kendo.cdn.telerik.com/2016.1.226/js/jszip.min.js"></script>
+  	<script src="http://kendo.cdn.telerik.com/2016.1.226/js/kendo.all.min.js"></script>
+  	<!--  -->
+  	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-cookies.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.5.9/angular-sanitize.min.js"></script>
+  	<script src="node_modules/angular-animate/angular-animate.min.js"></script>
+  	<script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
+  	<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+  	<!-- Angular Maps -->
+  	<script src="node_modules/ngmap/build/scripts/ng-map.min.js"></script>
+  	<script src="node_modules/ngmap/build/scripts/markerclusterer_packed.js"></script>
+  	<script src="https://maps.google.com/maps/api/js?libraries=placeses,visualization,drawing,geometry,places&key=AIzaSyCbMGRUwcqKjlYX4h4-P6t-xcDryRYLmCM"></script>
+  	<script src="bower_components/ng-affix/dist/js/ng-affix.js"></script>
+  	<!-- Services -->
+  	<script src="app/services/api.service.js"></script>
+  	<script src="app/services/pager.service.js"></script>
+  	<script src="app/services/cart.service.js"></script>
+  	<script src="app/services/attraction.service.js"></script>
+  	<script src="app/services/map.service.js"></script>
+  	<script src="app/services/ranking.service.js"></script>
+  	<script src="app/services/search.service.js"></script>
+  	<!-- Controllers -->
+  	<script src="app/components/home/home.controller.js"></script>
+  	<script src="app/components/attraction/attraction.controller.js"></script>
+  	<script src="app/components/search/search.controller.js"></script>
+  	<script src="app/components/layout/cart/cart.controller.js"></script>
+  	<!-- Twin App -->
+  	<script type="text/javascript" src="app/config.js"></script>
+  	<script type="text/javascript" src="app/run.js"></script>
+  	<script type="text/javascript" src="app/app.js"></script>
+  </head>
+  <body ng-app="twinApp" >
+    <div ng-controller="HomeController as vm">
+    	<section class="hero">
+    		<div class="container-fluid">
+    			<div class="row">
+    				<div class="col-lg-12">
+    					<div class="attraction-form form form-inline">
+    						<div class="form-group visit">
+    							<label>Where to <b>{{vm.homepage.search.where.value[0].title}}</b></label>
+                  <input type="text" kendo-autocomplete k-data-source="customersDataSource" k-data-text-field="'title'"
+                         k-data-value-field="'nid'" k-ng-model="foo"/>
+                  <!-- <input type="text" class="form-control"
+    								 kendo-autocomplete
+    								 k-data-source="customersDataSource"
+    								 k-data-text-field="'title'"
+                 		 k-data-value-field="'nid'"
+    								 k-ng-model="vm.homepage.search.where.value"
+    								 ng-attr-placeholder="{{vm.homepage.search.where.placeholder}}"
+    								 ng-focus="vm.homepage.search.where.placeholder = 'Search Location or Attractions e.g. London or British Museum'"
+    								 ng-blur="vm.homepage.search.where.placeholder = 'Anywhere'"
+
+    								  /> -->
+
+    						</div>
+
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+    	</section>
+
+
+    </div>
+
+
+  </body>
+</html>
