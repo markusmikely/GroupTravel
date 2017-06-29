@@ -2,7 +2,7 @@ RankingService.$inject = [];
 function RankingService() {
   return {
     Init: function(request, attraction) {
-    
+
       this.request = request;
       this.attraction = attraction;
       this.response = {};
@@ -16,23 +16,23 @@ function RankingService() {
       return this.response;
     },
     PreviousUserRank: function(attraction) {
-      var previous_rank = this.ExactMatch(this.request.previous_experiences);
-      // Add decay here after one year
-      var date = new Date(this.attraction.updated);
-      var age = calculateAge(date);
-      if(age >= 1) {
-         previous_rank = this.response.previous_rank * exp(-2*age*age);
-      }
+
+      var matches =  this.array_intersect(this.request.previous_experiences, this.attraction.experiences).length;
+      var previous_rank = matches * 0.25;
+
       return previous_rank;
     },
     CurrentUserRank($index) {
-      return this.ExactMatch(this.request.experiences);
+      var current = this.ExactMatch(this.request.experiences);
+
+      return current;
     },
     ExactMatch: function(experiences) {
-      var matches =  this.array_intersect(experiences, this.attraction.experiences).length * 500;
-      var notInAttraction = this.array_diff(this.array_intersect(experiences, this.attraction.experiences), this.attraction.experiences).length*(-100);
-      var notInRequest  = this.array_diff(this.array_intersect(experiences, this.attraction.experiences), experiences).length*(-200);
-      var exactMatchScore = (matches + notInAttraction + notInRequest);
+
+      var matches =  this.array_intersect(experiences, this.attraction.experiences).length;
+      var notInAttraction = this.array_diff(this.array_intersect(experiences, this.attraction.experiences), experiences).length;
+      var notInRequest  = this.array_diff(this.array_intersect(experiences, this.attraction.experiences), this.attraction.experiences).length;
+      var exactMatchScore = ((matches * 3) - (notInAttraction) - (notInRequest * 2));
       return exactMatchScore;
 
     },
@@ -53,7 +53,7 @@ function RankingService() {
       }
       return diff;
     },
-    array_intersect: function(a, arrbay2) {
+    array_intersect: function(a, b) {
       var t;
       if (b.length > a.length) t = b, b = a, a = t; // indexOf to loop over shorter
       return a.filter(function (e) {

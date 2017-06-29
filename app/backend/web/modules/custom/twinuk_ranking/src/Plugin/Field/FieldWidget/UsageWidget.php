@@ -110,10 +110,17 @@ class UsageWidget extends WidgetBase {
       // '#disabled' => TRUE,
     ];
     $element['quotes'] =  [
-      '#title' => t('Quotes'.$items[$delta]->quotes),
+      '#title' => t('Quotes'),
       '#type' => 'textfield',
       '#empty_value' => '0',
       '#default_value' => (isset($items[$delta]->quotes)) ? intval($items[$delta]->quotes) : 0,
+      '#disabled' => TRUE,
+    ];
+    $element['updated'] =  [
+      '#title' => t('Updated'),
+      '#type' => 'textfield',
+      '#empty_value' => '0',
+      '#default_value' => (isset($items[$delta]->updated)) ? intval($items[$delta]->updated) : 0,
       '#disabled' => TRUE,
     ];
     $element['value'] =  [

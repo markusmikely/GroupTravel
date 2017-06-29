@@ -9,6 +9,7 @@ var app= angular.module("twinApp", ['ngCookies', 'ui.router', 'ngMap', 'ngAnimat
 	.service("MapService", MapService)
 	.service("RankingService", RankingService)
 	.service("SearchService", SearchService)
+	.service("CookieService", CookieService)
 	.controller('HomeController', HomeController)
 	.controller('AttractionController', AttractionController)
 	.controller('SearchController', SearchController)

@@ -14,16 +14,47 @@
 @import url('single-attraction.css');
 @import url('search.css');
 
+.input-placeholder {
+    position: absolute;
+    top: 40px;
+    font-size: 14px;
+    color: #999;
+    left: 20px;
+}
+.k-autocomplete.k-state-default, .k-dropdown-wrap.k-state-default, .k-numeric-wrap.k-state-default, .k-picker-wrap.k-state-default {
+    border: none;
+    height:45px;
+}
+.k-state-default>.k-select {
+    background: white;
+    border: 1px solid #eee;
+    height: 45px;
+}
+span.k-icon.k-i-calendar{
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background:transparent;
+}
+span.k-icon.k-i-calendar:before {
+    content: "\e109";
+    background:transparent;
+    font-size:17px;
+}
+
 
 
 .animate-show {
-  /*line-height:20px;
-  opacity:1;*/
   padding:0 15px;
   height:178px;
   overflow: hidden;
 }
-
 .animate-show.ng-hide-add.ng-hide-add-active,
 .animate-show.ng-hide-remove.ng-hide-remove-active {
   -webkit-transition:all linear 0.2s;
@@ -669,9 +700,17 @@ a.selection-link:hover i {
     width: 150px;
 }
 .attraction-form .when input {
-    width: 140px;
+  width: 140px;
+  height: 45px;
+  padding: 0 10px;
+  font-size: 14px;
 }
-
+.image a.image-link {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    height: 350px;
+}
 .attraction-form .visit input {
   width: 400px !important;
   height: 45px !important;
@@ -680,7 +719,7 @@ a.selection-link:hover i {
 }
 .attraction-form .search button {
   padding: 10px 40px;
-  margin-top: 33px;
+  margin-top: 28px;
   height: 45px;
   font-style: normal !important;
 }
@@ -740,6 +779,8 @@ li.col-lg-6.attraction-thumb {
 }
 li.col-lg-6.attraction-thumb a {
     display: block;
+    height:165px;
+    width:165px;
 }
 li.col-lg-6.attraction-thumb h3 {
   position: absolute;

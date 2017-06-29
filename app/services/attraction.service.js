@@ -1,16 +1,15 @@
-AttractionService.$inject = ['$cookies', '$rootScope', '$http', 'ApiService'];
-function AttractionService($cookies, $rootScope, $http, ApiService) {
+AttractionService.$inject = ['$cookies', '$rootScope', '$http', 'ApiService', 'CookieService'];
+function AttractionService($cookies, $rootScope, $http, ApiService, CookieService) {
   return {
-  //   process attraction
-  // gettimeel
-  // getterms
-  // gettoppicks
-  // getMapAttractionsma
+    ProcessTags: function(array) {
+      var tags = [];
+      for(var i = 0; i < array.length; i++) {
+           var tagId = array[i].target_id;
+           tags.push(tagId);
+      }
+      return tags;
+    },
     ProcessEntity: function(attraction) {
-      console.log('attraction', attraction);
-      console.log('address', attraction.field_address.length);
-      // console.log('line1', attraction.field_address[0].address_line1);
-
       if(attraction != undefined) {
         var pAttraction = {
           'id': attraction.nid[0].value,
@@ -18,8 +17,8 @@ function AttractionService($cookies, $rootScope, $http, ApiService) {
           'address': {
             'address1': (attraction.field_address.length > 0) ? attraction.field_address[0].address_line1 : '',
             'address2': (attraction.field_address.length > 0) ? attraction.field_address[0].address_line2 : '',
-            'county': attraction.field_address[0].locality,
-            'postcode': attraction.field_address[0].postal_code,
+            'county': (attraction.field_address.length > 0) ? attraction.field_address[0].locality: '',
+            'postcode': (attraction.field_address.length > 0) ? attraction.field_address[0].postal_code: '',
           },
           'coordinates': {
             'lat': attraction.field_location[0].lat,
@@ -27,13 +26,15 @@ function AttractionService($cookies, $rootScope, $http, ApiService) {
           },
           'body': attraction.body[0].value,
           'summary': attraction.body[0].summary,
-          // 'experiences': attraction.field_experience_tags.split(","),
-          // 'images': attraction.field_feature.split(","),
           'time_required': attraction.field_time_required[0].value,
           'rank': attraction.field_rank[0],
           'focus': false,
           'featured':attraction.field_featured[0].value,
-          'images': attraction.field_images
+          'images': attraction.field_images,
+          'updated': attraction.changed[0].value,
+          'experiences' : this.ProcessTags(attraction.field_experience_tags),
+          'opening': attraction.field_opening_times[0].value,
+          'keyfeatures': attraction.field_k,
         };
         pAttraction.images = [];
         pAttraction.thumbnails = [];
@@ -41,13 +42,13 @@ function AttractionService($cookies, $rootScope, $http, ApiService) {
           pAttraction.images.push(attraction.field_images[i].url);
           pAttraction.thumbnails.push(attraction.field_images[i].url);
         }
+
         return pAttraction;
 
       }
       return null;
     },
     Process: function(attraction) {
-      console.log(attraction);
       if(attraction != undefined) {
         var pAttraction = {
           'id': attraction.nid,
@@ -60,8 +61,8 @@ function AttractionService($cookies, $rootScope, $http, ApiService) {
             'postcode': attraction.field_address_postal_code,
           },
           'body': attraction.body,
-          // 'experiences': attraction.field_experience_tags.split(","),
-          // 'images': attraction.field_feature.split(","),
+          'experiences': attraction.field_experience_tags.split(","),
+          'images': attraction.field_feature.split(","),
           'time_required':attraction.field_time_required,
           'rank': attraction.field_rank,
           'focus': false,
@@ -96,22 +97,11 @@ function AttractionService($cookies, $rootScope, $http, ApiService) {
       };
     },
     GetAttraction: function(id) {
-      //TO DO Init ajax call for data
-      // var url = "http://localhost/drupal/drupal-8.3.2/web/json/attraction-by-id/?nid="+id;
-      //
-      // return $http.get(url);
-
-      return $http.get('http://localhost/grouptravel/app/backend/web/v1/api/attraction-rank?id='+id);
-
-      // .then(function(r) {
-      //   if(r.status == 200) {
-      //     console.log(r.data[0].field_rank[0].saves);
-      //   }
-      // });
-
+      return $http.get('http://localhost/grouptravel/app/backend/web/v1/api/attraction-rank?nid='+id);
     },
     GetTopPicks: function() {
       var url = $rootScope.api+'json/top-picks';
+      url = "	http://localhost/grouptravel/app/backend/web/v1/api/top-picks";
       return $http.get(url);
     },
     GetMapAttractions: function() {
@@ -138,7 +128,6 @@ function AttractionService($cookies, $rootScope, $http, ApiService) {
       return style;
     },
     UpdateAttractionViews: function(attraction) {
-      // TODO Add a check if the user has visited thed website before
       var viewdAttractions = $cookies.get('twinuk_viewed_attractions'); // 1. check if cookie exists
 
       var attractions = [];
@@ -146,17 +135,20 @@ function AttractionService($cookies, $rootScope, $http, ApiService) {
         attractions = viewdAttractions.split(",");
       }
       if(attractions.indexOf(attraction.id.toString()) == -1) {
-        attractions.push(attraction.id);
-        var attractionString = attractions.toString();
-        $cookies.put('twinuk_viewed_attractions', attractionString);
-
           // Update attraction views
           attraction.rank.views = parseInt(attraction.rank.views)+ 1;
+          var updated = parseInt(Math.floor(Date.now() / 1000));
           var package = {
             "field_rank": [
     	         {
-    		           "views": attraction.rank.views,
-    	         }
+                  "popularity": attraction.rank.popularity,
+                  "upsell": attraction.rank.upsell,
+                  "views": attraction.rank.views,
+                  "saves": attraction.rank.saves,
+                  "quotes": attraction.rank.quotes,
+                  "rank": attraction.rank.rank,
+                  "updated": updated
+               }
              ],
              "type": [
                { "target_id": "attraction" }
@@ -166,17 +158,25 @@ function AttractionService($cookies, $rootScope, $http, ApiService) {
              }
           };
           ApiService.Patch(package, attraction.id).then(function(response) {
-            console.log(response);
-          });
+            CookieService.AddViewedAttraction(attraction);
+            CookieService.AddPreviousExperience(attraction.experiences);
+      });
 
       }
     },
     UpdateAttractionQuotes: function(attraction) {
       attraction.rank.quotes = parseInt(attraction.rank.quotes)+ 1;
+      var updated = Math.floor(Date.now() / 1000);
       var package = {
         "field_rank": [
            {
-               "quotes": attraction.rank.quotes,
+              "popularity": attraction.rank.popularity,
+              "upsell": attraction.rank.upsell,
+              "views": attraction.rank.views,
+              "saves": attraction.rank.saves,
+              "quotes": attraction.rank.quotes,
+              "rank": attraction.rank.rank,
+              "updated": updated
            }
          ],
          "type": [
@@ -187,27 +187,51 @@ function AttractionService($cookies, $rootScope, $http, ApiService) {
          }
       };
       ApiService.Patch(package, attraction.id).then(function(response) {
-        console.log(response);
+        if(response.status == 200) {
+          console.log(response.data);
+        } else {
+          console.log('Something when wrong: ApiService.Patch');
+        }
       });
     },
     UpdateAttractionSaves: function(attraction) {
-      attraction.rank.saves = parseInt(attraction.rank.saves)+ 1;
-      var package = {
-        "field_rank": [
-           {
-               "quotes": attraction.rank.saves,
-           }
-         ],
-         "type": [
-           { "target_id": "attraction" }
-         ],
-         "_links": {
-           "type": { "href": "http://localhost/grouptravel/app/backend/web/rest/type/node/attraction" }
-         }
-      };
-      ApiService.Patch(package, attraction.id).then(function(response) {
-        console.log(response);
-      });
+      var viewdAttractions = $cookies.get('twinuk_saved_attractions'); // 1. check if cookie exists
+
+      var attractions = [];
+      if(viewdAttractions != undefined) {
+        attractions = viewdAttractions.split(",");
+      }
+      if(attractions.indexOf(attraction.id.toString()) == -1) {
+
+          // Update attraction views
+          attraction.rank.saves = parseInt(attraction.rank.saves)+ 1;
+          var updated = Math.floor(Date.now() / 1000);
+          var package = {
+            "field_rank": [
+    	         {
+                  "popularity": attraction.rank.popularity,
+                  "upsell": attraction.rank.upsell,
+                  "views": attraction.rank.views,
+                  "saves": attraction.rank.saves,
+                  "quotes": attraction.rank.quotes,
+                  "rank": attraction.rank.rank,
+                  "updated": updated
+               }
+             ],
+             "type": [
+               { "target_id": "attraction" }
+             ],
+             "_links": {
+               "type": { "href": "http://localhost/grouptravel/app/backend/web/rest/type/node/attraction" }
+             }
+          };
+          ApiService.Patch(package, attraction.id).then(function(response) {
+            CookieService.AddSavedAttraction(attraction);
+            CookieService.AddPreviousExperience(attraction.experiences);
+          });
+
+      }
+
     }
   };
 };

@@ -43,42 +43,48 @@ class UsageItem extends FieldItemBase {
       ->setLabel(new TranslatableMarkup('Popularity'))
       ->setDescription('Total unique attraction views')
       ->setSettings(array(
-        'default_value' => 7,
-    ));;
+        'default_value' => 0,
+    ));
     // Prevent early t() calls by using the TranslatableMarkup.
     $properties['upsell'] = DataDefinition::create('float')
       ->setLabel(new TranslatableMarkup('Upsell'))
       ->setDescription('Total Number of save request')
       ->setSettings(array(
-        'default_value' => 8,
-      ));;
+        'default_value' => 0,
+      ));
     // Prevent early t() calls by using the TranslatableMarkup.
     $properties['views'] = DataDefinition::create('float')
       ->setLabel(new TranslatableMarkup('Views'))
       ->setDescription('Total unique attraction views')
       ->setSettings(array(
-        'default_value' => 9,
-    ));;
+        'default_value' => 0,
+    ));
     // Prevent early t() calls by using the TranslatableMarkup.
     $properties['saves'] = DataDefinition::create('float')
       ->setLabel(new TranslatableMarkup('Saves'))
       ->setDescription('Total Number of save request')
       ->setSettings(array(
-        'default_value' => 10,
-      ));;
+        'default_value' => 0,
+      ));
       // Prevent early t() calls by using the TranslatableMarkup.
       $properties['quotes'] = DataDefinition::create('float')
         ->setLabel(new TranslatableMarkup('Quotes'))
         ->setDescription('Total number of quote requests')
         ->setSettings(array(
-          'default_value' => 11,
-      ));;
+          'default_value' => 0,
+      ));
       $properties['rank'] = DataDefinition::create('float')
         ->setLabel(new TranslatableMarkup('Quotes'))
         ->setDescription('Total number of quote requests')
         ->setSettings(array(
-          'default_value' => 12,
-      ));;
+          'default_value' => 0,
+      ));
+      $properties['updated'] = DataDefinition::create('float')
+        ->setLabel(new TranslatableMarkup('Updated'))
+        ->setDescription('Total number of quote requests')
+        ->setSettings(array(
+          'default_value' => 0,
+      ));
       // Prevent early t() calls by using the TranslatableMarkup.
       $properties['value'] = DataDefinition::create('float')
         ->setLabel(new TranslatableMarkup('Usage Rank'))
@@ -86,8 +92,8 @@ class UsageItem extends FieldItemBase {
         ->setComputed(TRUE)
         ->setClass('\Drupal\twinuk_ranking\CalculateUsageRank')
         ->setSettings(array(
-          'default_value' => 13,
-      ));;
+          'default_value' => 0,
+      ));
 
     return $properties;
   }
@@ -103,42 +109,47 @@ class UsageItem extends FieldItemBase {
           'precision' => 18,
           'scale' => 12,
           'not null' => FALSE,
-          'default' =>1,
+          'default' =>0,
         ],
         'upsell' => [
           'type' => 'float',
           'precision' => 18,
           'scale' => 12,
           'not null' => FALSE,
-          'default' =>2,
+          'default' =>0,
         ],
         'views' => [
           'type' => 'float',
           'precision' => 18,
           'scale' => 12,
           'not null' => FALSE,
-          'default' =>3,
+          'default' =>0,
         ],
         'saves' => [
           'type' => 'float',
           'precision' => 18,
           'scale' => 12,
           'not null' => FALSE,
-          'default' =>4,
+          'default' =>0,
         ],
         'quotes' => [
           'type' => 'float',
           'precision' => 18,
           'scale' => 12,
           'not null' => FALSE,
-          'default' =>5,
+          'default' =>0,
+        ],
+        'updated' => [
+          'type' => 'int',
+          'not null' => FALSE,
+          'default' =>0,
         ],
         'rank' => [
           'type' => 'float',
           'precision' => 18,
           'scale' => 12,
           'not null' => FALSE,
-          'default' =>6,
+          'default' =>0,
         ],
       ],
     ];

@@ -78,6 +78,7 @@ class UsageFormatter extends FormatterBase {
       'saves' => $item->saves,
       'views' => $item->views,
       'quotes' => $item->quotes,
+      'updated' => $item->updated,
       'value' => $item->value
     );
 

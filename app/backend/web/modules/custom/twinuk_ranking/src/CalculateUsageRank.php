@@ -29,10 +29,19 @@ class CalculateUsageRank extends TypedData {
     //  if ($this->processed !== NULL) {
     //    return $this->processed;
     //  }
-
      $item = $this->getParent();
 
-     $usage_rank = ($item->views * 0.01) + ($item->saves* 0.1) + $item->quotes;
+    $usage_rank = ($item->views * 0.01) + ($item->saves* 0.1) + $item->quotes;
+
+    $startDate = date('d-m-Y', strtotime($item->updated));
+    $futureDate=date('d-m-Y', strtotime('+1 year', strtotime($startDate)));
+    $today = date('d-m-Y');
+
+    if(strtotime($futureDate) < strtotime($today)) {
+      $x = date('Y', strtotime($today))- date('Y', strtotime($futureDate));
+      $$usage_rank = $usage_rank * exp(-2*$x*$x);
+    }
+
      $popularity_rank = $item->popularity;
      $upsell_rank = $item->upsell;
 

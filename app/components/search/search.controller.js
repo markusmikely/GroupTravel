@@ -1,56 +1,31 @@
-SearchController.$inject = ['$http', '$state', '$rootScope', 'PagerService', 'MapService', 'AttractionService', '$scope', 'NgMap', '$compile', 'SearchService', 'ApiService', 'RankingService'];
-function SearchController($http, $state, $rootScope, PagerService, MapService, AttractionService, $scope, NgMap, $compile, SearchService, ApiService, RankingService) {
+SearchController.$inject = ['$filter', '$http', '$state', '$rootScope', 'PagerService', 'MapService', 'AttractionService', '$scope', 'NgMap', '$compile', 'SearchService', 'ApiService', 'RankingService', 'CookieService'];
+function SearchController($filter, $http, $state, $rootScope, PagerService, MapService, AttractionService, $scope, NgMap, $compile, SearchService, ApiService, RankingService, CookieService) {
 
   $scope.placeholder = "foo";
   $scope.monthSelectorOptions = {
-              start: "year",
-              depth: "year"
-            };
-            $scope.getType = function(x) {
-              return typeof x;
-            };
-            $scope.isDate = function(x) {
-              return x instanceof Date;
-            };
-
-            $scope.customersDataSource = {
-            transport: {
-              serverFiltering: true,
-              read: {
-                dataType: "json",
-                url: "/drupal/drupal-8.3.2/web/json/search-autocomplete"
-              }
-            },
-            group: { field: "type" } //group the data by 'Country' field
-
-          };
-
+    start: "year",
+    depth: "year"
+  };
+  $scope.getType = function(x) {
+    return typeof x;
+  };
+  $scope.isDate = function(x) {
+    return x instanceof Date;
+  };
+  $scope.customersDataSource = {
+    transport: {
+      serverFiltering: true,
+      read: {
+        dataType: "json",
+        url: "/drupal/drupal-8.3.2/web/json/search-autocomplete"
+      }
+    },
+    group: { field: "type" } //group the data by 'Country' field
+  };
 
   var vm = this;
-  window.vm = this;
-  // ATTRIBUTES
-  vm.loading = false;
-  vm.results = []; // dummy array of items to be paged
-  vm.pager = {};
-  vm.filter = {
-    'location' : {
-        'visible':false,
-        'placeholder': 'Anywhere',
-        'value': 'Anywhere'
-    },
-    'when': {
-        'visible':false,
-        'value': 'Anytime'
-    },
-    'tags': {
-        'visible':false,
-        'selected': []
-    },
-    'package' : {
-        'visible':false
-    }
-  };
-// FUNCTIONS
+
+  // FUNCTIONS
   vm.init = init;
   vm.setPage = setPage;
   vm.search = search;
@@ -60,6 +35,8 @@ function SearchController($http, $state, $rootScope, PagerService, MapService, A
   vm.showDetail = showDetail;
   vm.hideDetail = hideDetail;
   vm.toggleFilter = toggleFilter;
+  vm.processResults = processResults;
+  vm.toggleExp = toggleExp;
 
   // Init
   (function initController() {
@@ -67,7 +44,6 @@ function SearchController($http, $state, $rootScope, PagerService, MapService, A
   })();
 
   function toggleFilter(filter) {
-    console.log(filter);
     switch (filter) {
       case 'location':
         vm.filter.location.visible = !vm.filter.location.visible ;
@@ -97,6 +73,29 @@ function SearchController($http, $state, $rootScope, PagerService, MapService, A
     }
   };
   function init() {
+    // ATTRIBUTES
+    vm.loading = false;
+    vm.results = []; // dummy array of items to be paged
+    vm.pager = {};
+    vm.filter = {
+      'location' : {
+          'visible':false,
+          'placeholder': 'Anywhere',
+          'value': 'Anywhere'
+      },
+      'when': {
+          'visible':false,
+          'value': 'Anytime'
+      },
+      'tags': {
+          'visible':false,
+          'selected': []
+      },
+      'package' : {
+          'visible':false
+      }
+    };
+
     vm.loadExperiences();
     vm.search();
 
@@ -111,32 +110,20 @@ function SearchController($http, $state, $rootScope, PagerService, MapService, A
           checkOffset();
       });
     });
+
   };
-  function showFilter(filter) {
-    console.log(filter);
-  }
   function cancelFocus(attraction) {
     attraction.focus = false;
   };
   function focusOnResult(attraction) {
     attraction.focus = true;
   }
-  vm.showStore = function(evt, storeId) {
-    vm.store = vm.stores[storeId];
-    vm.map.showInfoWindow('foo', this);
-  };
-
   function showDetail(e, $index) {
     vm.attraction = vm.items[$index];
-    // vm.map.infowindow
-    // console.log(attraction);
-    // console.log(attraction.id);
-    // $scope.$apply();
-    vm.map.showInfoWindow('foo-iw', vm.attraction.id);
-
+    vm.map.showInfoWindow('map-iw', vm.attraction.id);
   };
   function hideDetail() {
-    vm.map.hideInfoWindow('foo-iw');
+    vm.map.hideInfoWindow('map-iw');
   };
   function setPage(page) {
     if (page < 1 || page > vm.pager.totalPages) {
@@ -156,22 +143,8 @@ function SearchController($http, $state, $rootScope, PagerService, MapService, A
 
       vm.map = map;
     });
-
-
-    // var infowindow = new google.maps.InfoWindow();
-    // var center = new google.maps.LatLng(40.71, -74.21);
-    // infowindow.setContent(
-    //             '<h3>foobar</h3>');
-    //
-    // infowindow.setPosition(center);
-    // infowindow.open($scope.objMapa);
-
-    // google.maps.event.trigger(vm.map,'resize');
-
   };
-  vm.toggleExp = toggleExp;
   function toggleExp(exp) {
-    console.log(exp);
     exp.selected = !exp.selected;
     if(vm.filter.tags.selected.indexOf(exp) == -1) {
       vm.filter.tags.selected.push(exp);
@@ -197,41 +170,66 @@ function SearchController($http, $state, $rootScope, PagerService, MapService, A
   function search() {
     var url = 'http://localhost/grouptravel/app/backend/web/v1/api/search';
 
+    vm.request = {
+      'experiences': [],
+      'previous_experiences': []
+    };
     ApiService.Get(url).then(function(response) {
       vm.loading = false;
       if(response.status == 200) {
-          var results = response.data;
-          console.log('results', results)
-;          vm.results = []; //response.data;
-          for (var i = 0; i < results.length; i++) {
-            //processAttraction
-            var attraction = AttractionService.ProcessEntity(results[i]);
-            var request = {
-              'experiences' : [],
-              'previous_experiences' : []
-            };
+          vm.res = response.data;
+          vm.results = []; //response.data;
 
-            var rank = RankingService.Init(request, attraction);
-
-            attraction.rank.previous = rank.previous;
-            attraction.rank.current = rank.current;
-
-            vm.results.push(attraction);
-          }
-          vm.setPage(1);
-
-          MapService.LoadSearchMap(vm.map).then(function(map) {
-            var bounds = new google.maps.LatLngBounds();
-            for (var k in map.markers) {
-              var cm = map.markers[k];
-              bounds.extend(cm.getPosition());
-            };
-            map.setCenter(bounds.getCenter());
-            map.fitBounds(bounds);
-
-            vm.map = map;
-          });
+          vm.request.previous_experiences = CookieService.GetPreviousExperiences();
+          if($rootScope.request != undefined) {
+            if($rootScope.request.where.value.length > 0) {
+              AttractionService.GetAttraction($rootScope.request.where.value[0].nid).then(function(response) {
+                if(response.status == 200) {
+                  vm.request.experiences = AttractionService.ProcessEntity(response.data[0]).experiences;
+                }
+                vm.processResults();
+              });
+            }
+          } else {
+              vm.processResults();
+          };
         }
+    });
+  };
+  function processResults() {
+    for (var i = 0; i < vm.res.length; i++) {
+      //processAttraction
+      var attraction = AttractionService.ProcessEntity(vm.res[i]);
+
+      var request = {
+        'experiences' : [],
+        'previous_experiences' : []//previousExperiences
+      };
+      var rank = RankingService.Init(vm.request, attraction);
+
+      attraction.rank.previous = rank.previous;
+      attraction.rank.current = rank.current;
+
+      attraction.rank.rank += attraction.rank.previous + attraction.rank.current;
+
+      vm.results.push(attraction);
+    }
+    vm.results.sort(function(a, b) { return a.rank.rank - b.rank.rank; }).reverse();
+
+    $filter('orderBy')(vm.results, 'rank.rank');
+
+    vm.setPage(1);
+
+    MapService.LoadSearchMap(vm.map).then(function(map) {
+      var bounds = new google.maps.LatLngBounds();
+      for (var k in map.markers) {
+        var cm = map.markers[k];
+        bounds.extend(cm.getPosition());
+      };
+      map.setCenter(bounds.getCenter());
+      map.fitBounds(bounds);
+
+      vm.map = map;
     });
   }
 };
